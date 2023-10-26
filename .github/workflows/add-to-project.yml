@@ -1,0 +1,16 @@
+name: Auto Assign to Project(
+
+on:
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  add-to-project:
+    if: github.repository == 'team5419/the_fault_in_our_tars'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/team5419/projects/1
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          
