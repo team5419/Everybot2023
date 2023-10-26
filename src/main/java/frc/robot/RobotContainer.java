@@ -4,13 +4,18 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.ArmToPosition;
+import frc.robot.commands.DefaultDrive;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,11 +25,18 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final Arm arm = new Arm();
+  private final Intake intake = new Intake();
+  private final Drive drive = new Drive();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandPS4Controller m_driverController =
+      new CommandPS4Controller(OperatorConstants.kDriverControllerPort);
+
+  // TODO: Declare and initialize the command(s)
+  CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
+  CommandBase highCone = new ArmToPosition(arm, 0, 0);
+  CommandBase cubeIntake = intake.startCubeIntakeCommand();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -42,13 +54,20 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // Configure the default command for the drive subsystem
+    // Scheduler will use the default command if no other command is using the subsystem
+    drive.setDefaultCommand(defaultDrive);
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // TODO: MAP GAMEPAD BUTTONS TO COMMANDS
+    // these are examples -- feel free to remap
+    m_driverController.povUp().onTrue(highCone);
+    // whileTrue -- schedules when pressed, cancels when released
+    m_driverController.cross().whileTrue(cubeIntake);
+
+    // Gets the boolean value of a button
+    // m_driverController.getHID().getCrossButton()
+    // Gets the trigger, which a command can be bound to
+    //  m_driverController.cross()
   }
 
   /**
@@ -58,6 +77,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    // return Autos.exampleAuto(m_exampleSubsystem);
+    return Commands.none();
   }
 }

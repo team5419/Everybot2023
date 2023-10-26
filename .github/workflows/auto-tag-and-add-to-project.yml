@@ -1,0 +1,29 @@
+name: Label issues
+on:
+  issues:
+    types: [opened]
+jobs:
+  label_issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["Needs Triage"]
+            })
+
+  add-to-project:
+    if: github.repository == 'team5419/the_fault_in_our_tars'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/team5419/projects/1
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          
