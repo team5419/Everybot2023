@@ -12,17 +12,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drive extends SubsystemBase {
   // Define member variables
   // TODO: SET CAN ID(s)
-  private final int leftLeadID = 0;
-  private final int leftFollowID = 1;
-  private final int rightLeadMotorID = 2;
-  private final int rightFollowID= 3;
+  private final int leftLeadID = 12;
+  private final int leftFollowID = 13;
+  private final int rightLeadMotorID = 22;
+  private final int rightFollowID= 23;
+
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
 
   // TODO: add the right follower for the same for the right side
   private final CANSparkMax rightLeadMotor;
-
+  private final CANSparkMax rightFollowMotor;
   DifferentialDrive drivetrain;
 
   // For odometry in the future:
@@ -39,11 +40,12 @@ public class Drive extends SubsystemBase {
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
     rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+    rightFollowMotor = new CANSparkMax(rightLeadMotorID, MotorType.kBrushless);
 
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
-
+    rightFollowMotor.follow(rightLeadMotor);
     // TODO: Same for right side
 
     // class that contains all the wpilib control methods

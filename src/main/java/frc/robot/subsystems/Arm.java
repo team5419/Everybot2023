@@ -9,14 +9,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
 
   // TODO: ADD AND SET CAN ID(s)
-
+  private final int ArmID  = 4;
   // TODO: DECLARE MOTOR (CANSparkMax object)
-
+  // private final CANSparkMax Arm;
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
-
+  private int LOW;
+  private int MEDIUM;
+  private int HIGH;
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
   // public static final
 
