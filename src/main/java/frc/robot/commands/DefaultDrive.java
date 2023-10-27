@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.subsystems.Drive;
@@ -11,13 +12,13 @@ import frc.robot.subsystems.Drive;
 /** An example command that uses an example subsystem. */
 public class DefaultDrive extends CommandBase {
   private final Drive drivetrain;
-  private final CommandPS4Controller controller;
+  private final XboxController controller;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DefaultDrive(Drive drivetrain, CommandPS4Controller controller) {
+  public DefaultDrive(Drive drivetrain, XboxController controller) {
     this.drivetrain = drivetrain;
     this.controller = controller;
     // Use addRequirements() here to declare subsystem dependencies.

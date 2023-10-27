@@ -39,50 +39,50 @@ public class Intake extends SubsystemBase {
         });
   }
 
-  // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  public void setHoldConePower() {}
+  // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
+  // public void setHoldConePower() {}
 
-  public void setHoldCubePower() {}
+  // public void setHoldCubePower() {}
 
-  public CommandBase startConeIntakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
+  // public CommandBase startConeIntakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand();
+  // }
 
-  public CommandBase startConeOuttakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
+  // public CommandBase startConeOuttakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand();
+  // }
 
-  // Cubes and cones are fed in from different directions so the roller drive direction will be
-  // inverted
+  // // Cubes and cones are fed in from different directions so the roller drive direction will be
+  // // inverted
   public CommandBase startCubeIntakeCommand() {
     // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
-
-  public CommandBase startCubeOuttakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
-
-  public CommandBase stopIntakeCommand() {
     return setRollerPowerCommand(0);
   }
 
-  public boolean hasCone() {
-    // TODO: determine if intake has a cone because the current is high
-    return false;
-  }
+  // public CommandBase startCubeOuttakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand();
+  // }
 
-  public boolean hasCube() {
-    // TODO: determine if intake has a cube because the current is high -- this might be harder to
-    // detect
-    return false;
-  }
+  // public CommandBase stopIntakeCommand() {
+  //   return setRollerPowerCommand(0);
+  // }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  // public boolean hasCone() {
+  //   // TODO: determine if intake has a cone because the current is high
+  //   return false;
+  // }
+
+  // public boolean hasCube() {
+  //   // TODO: determine if intake has a cube because the current is high -- this might be harder to
+  //   // detect
+  //   return false;
+  // }
+
+  // @Override
+  // public void periodic() {
+  //   // This method will be called once per scheduler run
+  // }
 }

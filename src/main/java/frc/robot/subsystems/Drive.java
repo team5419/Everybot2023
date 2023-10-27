@@ -13,7 +13,9 @@ public class Drive extends SubsystemBase {
   // Define member variables
   // TODO: SET CAN ID(s)
   private final int leftLeadID = 0;
-  private final int leftFollowID = 0;
+  private final int leftFollowID = 1;
+  private final int rightLeadMotorID = 2;
+  private final int rightFollowID= 3;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
@@ -36,6 +38,8 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
