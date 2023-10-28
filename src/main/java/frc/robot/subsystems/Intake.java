@@ -4,13 +4,17 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+//import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
+  private final int intakeID = 0;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
+  private final CANSparkMax intakeMotor;
 
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
@@ -21,14 +25,18 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     // TODO: Initialize motor controller
+    intakeMotor = new CANSparkMax(intakeID, MotorType.kBrushless);
 
     // TODO: set current limit
-    // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
+    intakeMotor.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
+    //just a guess sorry no one will see this anyways
+    // intakeMotor.stopMotor();
 
   }
 
+  /*
   // This command requires the Intake subsystem
   public CommandBase setRollerPowerCommand(double power) {
     // Inline construction of command goes here.
@@ -36,53 +44,55 @@ public class Intake extends SubsystemBase {
     return runOnce(
         () -> {
           // TODO: set intake power (reference the constant defined above)
+          //again a guess becuase I was never told how to do anything
+          intakeMotor.set(power);
         });
   }
 
-  // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  // public void setHoldConePower() {}
+  // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
+  public void setHoldConePower() {}
 
-  // public void setHoldCubePower() {}
+  public void setHoldCubePower() {}
 
-  // public CommandBase startConeIntakeCommand() {
-  //   // TODO: set power based on constant defined above
-  //   return setRollerPowerCommand();
-  // }
+  public CommandBase startConeIntakeCommand() {
+    // TODO: set power based on constant defined above
+    return setRollerPowerCommand();
+  }
 
-  // public CommandBase startConeOuttakeCommand() {
-  //   // TODO: set power based on constant defined above
-  //   return setRollerPowerCommand();
-  // }
+  public CommandBase startConeOuttakeCommand() {
+    // TODO: set power based on constant defined above
+    return setRollerPowerCommand();
+  }
 
-  // // Cubes and cones are fed in from different directions so the roller drive direction will be
-  // // inverted
+  // Cubes and cones are fed in from different directions so the roller drive direction will be
+  // inverted
   public CommandBase startCubeIntakeCommand() {
     // TODO: set power based on constant defined above
+    return setRollerPowerCommand();
+  }
+
+  public CommandBase startCubeOuttakeCommand() {
+    // TODO: set power based on constant defined above
+    return setRollerPowerCommand();
+  }
+
+  public CommandBase stopIntakeCommand() {
     return setRollerPowerCommand(0);
   }
 
-  // public CommandBase startCubeOuttakeCommand() {
-  //   // TODO: set power based on constant defined above
-  //   return setRollerPowerCommand();
-  // }
+  public boolean hasCone() {
+    // TODO: determine if intake has a cone because the current is high
+    return false;
+  }
 
-  // public CommandBase stopIntakeCommand() {
-  //   return setRollerPowerCommand(0);
-  // }
-
-  // public boolean hasCone() {
-  //   // TODO: determine if intake has a cone because the current is high
-  //   return false;
-  // }
-
-  // public boolean hasCube() {
-  //   // TODO: determine if intake has a cube because the current is high -- this might be harder to
-  //   // detect
-  //   return false;
-  // }
-
-  // @Override
-  // public void periodic() {
-  //   // This method will be called once per scheduler run
-  // }
+  public boolean hasCube() {
+    // TODO: determine if intake has a cube because the current is high -- this might be harder to
+    // detect
+    return false;
+  }
+   */
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
 }

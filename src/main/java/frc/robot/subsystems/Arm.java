@@ -13,7 +13,7 @@ public class Arm extends SubsystemBase {
   // TODO: DECLARE MOTOR (CANSparkMax object)
 
   // set motor current limits
-  private final int ARM_CURRENT_LIMIT = 20;
+ // private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
 

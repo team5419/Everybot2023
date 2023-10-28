@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+//import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
@@ -20,7 +20,7 @@ import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Intake;
+//import frc.robot.subsystems.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,7 +31,7 @@ import frc.robot.subsystems.Intake;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Arm arm = new Arm();
-  private final Intake intake = new Intake();
+  //private final Intake intake = new Intake();
   private final Drive drive = new Drive();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -41,7 +41,7 @@ public class RobotContainer {
   // TODO: Declare and initialize the command(s)
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase highCone = new ArmToPosition(arm, 0, 0);
-  CommandBase cubeIntake = intake.startCubeIntakeCommand();
+  // CommandBase cubeIntake = intake.startCubeIntakeCommand();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -70,7 +70,7 @@ public class RobotContainer {
 
     // TODO: MAP GAMEPAD BUTTONS TO COMMANDS
     // these are examples -- feel free to remap
-    driverMap.get("X").whileTrue(cubeIntake);
+    // driverMap.get("X").whileTrue(cubeIntake);
     // whileTrue -- schedules when pressed, cancels when released
     driverMap.get("dpad").onTrue(highCone);
     driverMap.get("X").onTrue(new PrintCommand("Print"));
