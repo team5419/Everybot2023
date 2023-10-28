@@ -9,10 +9,10 @@ import frc.robot.subsystems.Arm;
 
 /** An example command that uses an example subsystem. */
 public class ZeroArmPosition extends CommandBase {
-  private final Arm arm;
+  // private final Arm arm;
 
   public ZeroArmPosition(Arm arm) {
-    this.arm = arm;
+    // this.arm = arm;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(arm);

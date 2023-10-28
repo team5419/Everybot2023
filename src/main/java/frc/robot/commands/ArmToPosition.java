@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 
 public class ArmToPosition extends CommandBase {
-  private final Arm arm;
-  private final int target;
-  private final int tolerance;
+  // private final Arm arm;
+  // private final int target;
+  // private final int tolerance;
 
   public ArmToPosition(Arm arm, int target, int tolerance) {
-    this.arm = arm;
-    this.target = target;
-    this.tolerance = tolerance;
+    // this.arm = arm;
+    // this.target = target;
+    // this.tolerance = tolerance;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(arm);

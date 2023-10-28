@@ -20,7 +20,6 @@ public class Drive extends SubsystemBase {
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
 
-  // add the right follower for the same for the right side
   private final CANSparkMax rightLeadMotor;
   private final CANSparkMax rightFollowMotor;
 

@@ -4,16 +4,20 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
+  private final int IntakeID = 1;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
+  private final CANSparkMax m_Intake;
 
   // set motor current limit
-  private static final int INTAKE_CURRENT_LIMIT = 20;
+  // private static final int INTAKE_CURRENT_LIMIT = 20;
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
 
@@ -21,6 +25,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     // TODO: Initialize motor controller
+    m_Intake = new CANSparkMax(IntakeID, MotorType.kBrushless);
 
     // TODO: set current limit
     // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
