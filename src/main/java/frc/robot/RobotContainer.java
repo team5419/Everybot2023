@@ -4,9 +4,14 @@
 
 package frc.robot;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -30,8 +35,8 @@ public class RobotContainer {
   private final Drive drive = new Drive();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandPS4Controller m_driverController =
-      new CommandPS4Controller(OperatorConstants.kDriverControllerPort);
+  private final XboxController m_driverController =
+      new XboxController(OperatorConstants.kDriverControllerPort);
 
   // TODO: Declare and initialize the command(s)
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
@@ -57,12 +62,18 @@ public class RobotContainer {
     // Configure the default command for the drive subsystem
     // Scheduler will use the default command if no other command is using the subsystem
     drive.setDefaultCommand(defaultDrive);
+    Map<String,Trigger> driverMap = new HashMap<>();
+
+    driverMap.put("dpad", new Trigger(() -> m_driverController.getPOV() != -1));
+    // whileTrue -- schedules when pressed, cancels when released
+    driverMap.put("X", new Trigger(m_driverController::getXButton));
 
     // TODO: MAP GAMEPAD BUTTONS TO COMMANDS
     // these are examples -- feel free to remap
-    m_driverController.povUp().onTrue(highCone);
+    driverMap.get("X").whileTrue(cubeIntake);
     // whileTrue -- schedules when pressed, cancels when released
-    m_driverController.cross().whileTrue(cubeIntake);
+    driverMap.get("dpad").onTrue(highCone);
+    driverMap.get("X").onTrue(new PrintCommand("Print"));
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
