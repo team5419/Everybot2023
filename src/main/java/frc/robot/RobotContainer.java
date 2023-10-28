@@ -36,7 +36,7 @@ public class RobotContainer {
   // TODO: Declare and initialize the command(s)
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase highCone = new ArmToPosition(arm, 0, 0);
-  CommandBase cubeIntake = intake.startCubeIntakeCommand();
+  // CommandBase cubeIntake = intake.startCubeIntakeCommand();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -62,7 +62,7 @@ public class RobotContainer {
     // these are examples -- feel free to remap
     m_driverController.povUp().onTrue(highCone);
     // whileTrue -- schedules when pressed, cancels when released
-    m_driverController.cross().whileTrue(cubeIntake);
+    // m_driverController.cross().whileTrue(cubeIntake);
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()

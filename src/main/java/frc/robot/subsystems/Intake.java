@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+// import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -29,57 +29,58 @@ public class Intake extends SubsystemBase {
 
   }
 
-  // This command requires the Intake subsystem
-  public CommandBase setRollerPowerCommand(double power) {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          // TODO: set intake power (reference the constant defined above)
-        });
-  }
+  // // This command requires the Intake subsystem
+  // public CommandBase setRollerPowerCommand(double power) {
+  //   // Inline construction of command goes here.
+  //   // Subsystem::RunOnce implicitly requires `this` subsystem.
+  //   return runOnce(
+  //       () -> {
+  //         // TODO: set intake power (reference the constant defined above)
+  //       });
+  // }
 
-  // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  public void setHoldConePower() {}
+  // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
+  // public void setHoldConePower() {}
 
-  public void setHoldCubePower() {}
+  // public void setHoldCubePower() {}
 
-  public CommandBase startConeIntakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
+  // public CommandBase startConeIntakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand(0);
+  // }
 
-  public CommandBase startConeOuttakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
+  // public CommandBase startConeOuttakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand(0);
+  // }
 
-  // Cubes and cones are fed in from different directions so the roller drive direction will be
-  // inverted
-  public CommandBase startCubeIntakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
+  // // Cubes and cones are fed in from different directions so the roller drive direction will be
+  // // inverted
+  // public CommandBase startCubeIntakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand(0);
+  // }
 
-  public CommandBase startCubeOuttakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand();
-  }
+  // public CommandBase startCubeOuttakeCommand() {
+  //   // TODO: set power based on constant defined above
+  //   return setRollerPowerCommand(0);
+  // }
 
-  public CommandBase stopIntakeCommand() {
-    return setRollerPowerCommand(0);
-  }
+  // public CommandBase stopIntakeCommand() {
+  //   return setRollerPowerCommand(0);
+  // }
 
-  public boolean hasCone() {
-    // TODO: determine if intake has a cone because the current is high
-    return false;
-  }
+  // public boolean hasCone() {
+  //   // TODO: determine if intake has a cone because
+  //   // the current is high
+  //   return false;
+  // }
 
-  public boolean hasCube() {
-    // TODO: determine if intake has a cube because the current is high -- this might be harder to
-    // detect
-    return false;
-  }
+  // public boolean hasCube() {
+  //   // TODO: determine if intake has a cube because the
+  //   // current is high -- this might be harder to detect
+  //   return false;
+  // }
 
   @Override
   public void periodic() {
