@@ -40,7 +40,7 @@ public class Drive extends SubsystemBase {
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
     rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
-    rightFollowMotor = new CANSparkMax(rightLeadMotorID, MotorType.kBrushless);
+    rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
 
 
     // link the control of the two motors together, since they drive one common gearbox
@@ -62,6 +62,6 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+
   }
 }
