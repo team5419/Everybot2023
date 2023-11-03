@@ -17,7 +17,7 @@ public class Intake extends SubsystemBase {
   private final CANSparkMax intakeMotor;
 
   // set motor current limit
-  private static final int INTAKE_CURRENT_LIMIT = 20;
+  //private static final int INTAKE_CURRENT_LIMIT = 20;
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
 

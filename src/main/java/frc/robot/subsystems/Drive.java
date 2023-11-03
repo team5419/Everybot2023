@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drive extends SubsystemBase {
   // Define member variables
   // TODO: SET CAN ID(s)
-  private final int leftLeadID = 12;
-  private final int leftFollowID = 13;
-  private final int rightLeadMotorID = 22;
-  private final int rightFollowID = 23;
+  private final int leftLeadID = 0;
+  private final int leftFollowID = 1;
+  private final int rightLeadMotorID = 2;
+  private final int rightFollowID= 3;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
