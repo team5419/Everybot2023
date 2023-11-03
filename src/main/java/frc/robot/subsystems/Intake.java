@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-//import edu.wpi.first.wpilibj2.command.CommandBase;
+//aaaimport edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -28,7 +28,7 @@ public class Intake extends SubsystemBase {
     intakeMotor = new CANSparkMax(intakeID, MotorType.kBrushless);
 
     // TODO: set current limit
-    intakeMotor.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
+    intakeMotor.setSmartCurrentLimit(0);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     //just a guess sorry no one will see this anyways
