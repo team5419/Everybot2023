@@ -12,17 +12,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drive extends SubsystemBase {
   // Define member variables
   // TODO: SET CAN ID(s)
-  private final int leftLeadID = 12;
-  private final int leftFollowID = 13;
+  private final int leftLeadID = 0;
+  private final int leftFollowID = 1;
+  private final int rightLeadMotorID = 2;
+  private final int rightFollowID= 3;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
-
-  // TODO: add the right follower for the same for the right side
-  private final int rightLeadID = 22;
-  private final int rightFollowID = 23;
   private final CANSparkMax rightLeadMotor;
   private final CANSparkMax rightFollowMotor;
+
+  // TODO: add the right follower for the same for the right side
 
   DifferentialDrive drivetrain;
 
@@ -39,16 +39,16 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
-
-    rightLeadMotor = new CANSparkMax(rightLeadID, MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
+
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
+    rightFollowMotor.follow(rightLeadMotor);
 
     // TODO: Same for right side
 
-    rightFollowMotor.follow(rightLeadMotor);
     // class that contains all the wpilib control methods
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
   }
@@ -57,6 +57,9 @@ public class Drive extends SubsystemBase {
     drivetrain.tankDrive(left, right);
   }
 
+  public void arcade(){}
+
+  public void curvature(){}
   // TODO: other differential drive modes that can be considered later
   // public void arcade() {}
   // public void curvature() {}

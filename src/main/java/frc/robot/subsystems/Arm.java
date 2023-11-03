@@ -4,27 +4,35 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
 
+
   // TODO: ADD AND SET CAN ID(s)
-
+  private final int armID = 19;
   // TODO: DECLARE MOTOR (CANSparkMax object)
-
+  private final CANSparkMax armMotor;
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
 
+  private final int armLowPosition;
+  private final int armMidPosition;
+  private final int armHighPosition;
+  private final int PLATFORM_intake;
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
   // public static final
-
+  private final int shuffleBArmMotorTicks;
+  private final int shuffleBArmPID;
   public Arm() {
     // TODO: Initialize motor controller
 
     // TODO: set current limit
-    // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     // m_arm.setIdleMode(IdleMode.kBrake);

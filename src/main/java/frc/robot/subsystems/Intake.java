@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -11,6 +13,7 @@ public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
+  private static final CANSparkMax motor;
 
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
