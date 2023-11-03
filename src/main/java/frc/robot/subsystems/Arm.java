@@ -4,24 +4,34 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+//imports for position
+
 
 public class Arm extends SubsystemBase {
 
   // TODO: ADD AND SET CAN ID(s)
+  private final int armMotorID = 19;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
+  private final CANSparkMax armMotor;
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
 
+
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
   // public static final
 
   public Arm() {
     // TODO: Initialize motor controller
+    armMotor = new CANSparkMax(armMotorID, MotorType.kBrushless);
 
     // TODO: set current limit
     // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);

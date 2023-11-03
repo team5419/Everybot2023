@@ -22,11 +22,12 @@ public class Drive extends SubsystemBase {
 
   // TODO: add the right follower for the same for the right side
   private final CANSparkMax rightLeadMotor;
+  private final CANSparkMax rightFollowMotor;
 
   DifferentialDrive drivetrain;
 
   // For odometry in the future:
-  // https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/DifferentialDriveOdometry.html
+  // https://github.wpilib.org/allwpilib/docs/relerase/java/edu/wpi/first/math/kinematics/DifferentialDriveOdometry.html
   // Add gyro
   // Add the odometry class
   // Add math to translate encoder ticks to linear wheel distance
@@ -39,12 +40,14 @@ public class Drive extends SubsystemBase {
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
     rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+    rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
 
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
 
     // TODO: Same for right side
+    rightFollowMotor.follow(rightLeadMotor);
 
     // class that contains all the wpilib control methods
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);

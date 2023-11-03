@@ -4,29 +4,50 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilderImpl;
+
 public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
+  private final int IntakeID = 16;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
-
+  //private CANSparkMax intakeCanSparkMaxMotor;
+  private CANSparkMax intakeMotor;
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
 
+
+  //this is my code it just don't work for some reason
+  //SmartDashboard.putNumber("Wheel power", intakeCanSparkMaxMotor.getVoltage());
+
+
+
   // TODO: DEFINE INTAKE/OUTTAKE/HOLDING POWERS
+
 
   public Intake() {
     // TODO: Initialize motor controller
+    intakeMotor = new CANSparkMax(IntakeID, MotorType.kBrushless);
 
     // TODO: set current limit
     // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
+    intakeMotor.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
-
+    intakeMotor.setIdleMode(IdleMode.kBrake);
   }
 
   // This command requires the Intake subsystem
@@ -36,13 +57,18 @@ public class Intake extends SubsystemBase {
     return runOnce(
         () -> {
           // TODO: set intake power (reference the constant defined above)
+          intakeMotor.setVoltage(power);
         });
   }
 
   // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  // public void setHoldConePower() {}
+  public void setHoldConePower() {
+    //intakeMotor.setIdleMode();
+  }
 
-  // public void setHoldCubePower() {}
+   public void setHoldCubePower() {
+    //intakeMotor.setHoldCubePower();
+   }
 
   // public CommandBase startConeIntakeCommand() {
   //   // TODO: set power based on constant defined above
