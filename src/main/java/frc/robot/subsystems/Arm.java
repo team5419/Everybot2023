@@ -30,10 +30,9 @@ public class Arm extends SubsystemBase {
 
     // TODO: set current limit
     // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
-
+      m_arm.setSmartCurrentLimit(18);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     // m_arm.setIdleMode(IdleMode.kBrake);
-
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
     // // set PID coefficients

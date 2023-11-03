@@ -4,29 +4,35 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
-
+  private final int intakeMotorID = 23;
   // TODO: DECLARE MOTOR (CANSparkMax object)
+
+   private CANSparkMax intake_m;
 
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
-
+  private final int intake_Power = 0;
+    private final int outtake_Power = 0;
+      private final int holding_Power = 0;
   // TODO: DEFINE INTAKE/OUTTAKE/HOLDING POWERS
-
   public Intake() {
     // TODO: Initialize motor controller
-
+     intake_m = new CANSparkMax(intakeMotorID, MotorType.kBrushless);
     // TODO: set current limit
     // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
-
+     intake_m.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
-
+    intake_m.setIdleMode(IdleMode.kBrake);
   }
 
   // This command requires the Intake subsystem
