@@ -43,8 +43,6 @@ public class Drive extends SubsystemBase {
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
-
-    // TODO: Same for right side
     rightFollowMotor.follow(rightLeadMotor);
 
     // class that contains all the wpilib control methods

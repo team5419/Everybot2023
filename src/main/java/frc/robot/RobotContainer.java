@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
+// import edu.wpi.first.wpilibj2.command.PrintCommand;
 // import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
@@ -27,7 +27,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  // TODO: Declare and initialize the command(s)
+  // Declare and initialize the commands
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase highCone = new ArmToPosition(arm, 0, 0);
   CommandBase cubeIntake = intake.startCubeIntakeCommand();
