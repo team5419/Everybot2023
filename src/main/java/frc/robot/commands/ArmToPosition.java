@@ -34,6 +34,9 @@ public class ArmToPosition extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // TODO: IF NOT INTERRUPTED -- STOP ARM
+    if (interrupted == false) {
+      
+    }
     // BONUS: SHOW THAT WE'VE REACHED THE END WITH A COLOR INDICATOR ON SHUFFLEBOARD
   }
 

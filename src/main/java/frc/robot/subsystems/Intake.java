@@ -9,14 +9,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax.IdleMode;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class Intake extends SubsystemBase {
   // SET CAN ID
   private final int IntakeID = 6;
-
   // DECLARE MOTOR (CANSparkMax object)
   private final CANSparkMax m_Intake;
-
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 30;
 
@@ -27,10 +27,8 @@ public class Intake extends SubsystemBase {
   public Intake() {
     // Initialize motor controller
     m_Intake = new CANSparkMax(IntakeID, MotorType.kBrushless);
-
     // set current limit
     m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
-
     // set motor to brake mode
     m_Intake.setIdleMode(IdleMode.kBrake);
   }
@@ -46,6 +44,8 @@ public class Intake extends SubsystemBase {
   }
 
   // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
+  ShuffleboardTab intake = Shuffleboard.getTab("Intake");
+
   // public void setHoldConePower() {}
 
   // public void setHoldCubePower() {}
@@ -82,8 +82,7 @@ public class Intake extends SubsystemBase {
   // }
 
   // public boolean hasCube() {
-  //   // TODO: determine if intake has a cube because the current is high -- this might be harder to
-  //   // detect
+  //   // TODO: determine if intake has a cube because the current is high--this might be harder to detect
   //   return false;
   // }
 
