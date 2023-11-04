@@ -32,7 +32,7 @@ public class DefaultDrive extends CommandBase {
   @Override
   public void execute() {
     // System.out.println("lefty" + controller.getLeftY());
-    drivetrain.tank(-controller.getLeftY()/2.0, controller.getRightY()/2.0);
+    drivetrain.tank(controller.getLeftY()/2.0, controller.getRightY()/2.0);
   }
 
   // Called once the command ends or is interrupted.
