@@ -5,9 +5,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
@@ -18,6 +19,7 @@ public class Arm extends SubsystemBase {
 
   // DECLARE MOTOR (CANSparkMax object)
   private final CANSparkMax m_Arm;
+  private final RelativeEncoder m_encoder;
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 30;
@@ -34,6 +36,7 @@ public class Arm extends SubsystemBase {
     m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
     // set motor to brake mode
     m_Arm.setIdleMode(IdleMode.kBrake);
+    m_encoder = m_Arm.getEncoder();
 
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
@@ -56,7 +59,6 @@ public class Arm extends SubsystemBase {
     // SmartDashboard.putNumber("Set Rotations", 0);
 
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
-    ShuffleboardTab arm = Shuffleboard.getTab("Arm");
   }
 
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
@@ -79,6 +81,7 @@ public class Arm extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
-    //arm.addNumber("Encoder angle", () -> getEncoderAngle());
+    ShuffleboardTab arm = Shuffleboard.getTab("Arm");
+    arm.addNumber("Encoder angle", () -> m_encoder.getPosition());
   }
 }

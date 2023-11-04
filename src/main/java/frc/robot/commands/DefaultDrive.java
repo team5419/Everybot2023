@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-// import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.subsystems.Drive;
 
 /** An example command that uses an example subsystem. */
@@ -32,7 +31,7 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.tank(controller.getLeftY()/2.0, controller.getRightY()/2.0);
+    drivetrain.tank(controller.getLeftY()/(-2.0), controller.getRightY()/2.0);
   }
 
   // Called once the command ends or is interrupted.
