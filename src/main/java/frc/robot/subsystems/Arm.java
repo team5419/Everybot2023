@@ -8,6 +8,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax.IdleMode;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class Arm extends SubsystemBase {
 
@@ -28,10 +30,8 @@ public class Arm extends SubsystemBase {
   public Arm() {
     // Initialize motor controller
     m_Arm = new CANSparkMax(ArmID, MotorType.kBrushless);
-
     // set current limit
     m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
-
     // set motor to brake mode
     m_Arm.setIdleMode(IdleMode.kBrake);
 
@@ -56,6 +56,7 @@ public class Arm extends SubsystemBase {
     // SmartDashboard.putNumber("Set Rotations", 0);
 
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
+    ShuffleboardTab arm = Shuffleboard.getTab("Arm");
   }
 
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
@@ -77,7 +78,7 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
     // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
+    //arm.addNumber("Encoder angle", () -> getEncoderAngle());
   }
 }
