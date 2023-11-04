@@ -15,8 +15,7 @@ public class Drive extends SubsystemBase {
   private final int leftLeadID = 12;
   private final int leftFollowID = 13;
   private final int rightLeadMotorID = 22;
-  private final int rightFollowID= 23;
-
+  private final int rightFollowID = 23;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
@@ -39,9 +38,8 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
-    rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadMotorID, MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
-
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
@@ -61,7 +59,5 @@ public class Drive extends SubsystemBase {
   // public void curvature() {}
 
   @Override
-  public void periodic() {
-
-  }
+  public void periodic() {}
 }

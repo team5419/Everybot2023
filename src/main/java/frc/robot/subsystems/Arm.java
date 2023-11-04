@@ -4,16 +4,14 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
   // TODO: ADD AND SET CAN ID(s)
-  private final int armID  = 4;
+  private final int armID = 4;
   // TODO: DECLARE MOTOR (CANSparkMax object)
   private final CANSparkMax m_arm;
   private RelativeEncoder m_encoder;
@@ -21,12 +19,13 @@ public class Arm extends SubsystemBase {
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
-  private int LOW; //change later
+  private int LOW; // change later
   private int MEDIUM; // change later
   private int HIGH; // change later
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
   // public static final
   private int armTarget = 0;
+
   public Arm() {
     // TODO: Initialize motor controller
     m_arm = new CANSparkMax(armID, MotorType.kBrushless);
@@ -34,10 +33,10 @@ public class Arm extends SubsystemBase {
 
     // TODO: set current limit
     // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
-      m_arm.setSmartCurrentLimit(30);
+    m_arm.setSmartCurrentLimit(30);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
 
-      m_arm.setIdleMode(IdleMode.kBrake);
+    m_arm.setIdleMode(IdleMode.kBrake);
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
     // // set PID coefficients

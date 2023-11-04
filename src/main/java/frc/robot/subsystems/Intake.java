@@ -15,22 +15,22 @@ public class Intake extends SubsystemBase {
   private final int intakeMotorID = 23;
   // TODO: DECLARE MOTOR (CANSparkMax object)
 
-   private CANSparkMax intake_m;
+  private CANSparkMax intake_m;
 
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
   private final int intake_Power = 0;
-    private final int outtake_Power = 0;
-      private final int holding_Power = 0;
+  private final int outtake_Power = 0;
+  private final int holding_Power = 0;
   // TODO: DEFINE INTAKE/OUTTAKE/HOLDING POWERS
   public Intake() {
     // TODO: Initialize motor controller
-     intake_m = new CANSparkMax(intakeMotorID, MotorType.kBrushless);
+    intake_m = new CANSparkMax(intakeMotorID, MotorType.kBrushless);
     // TODO: set current limit
     // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
-     intake_m.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
+    intake_m.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     intake_m.setIdleMode(IdleMode.kBrake);
   }
@@ -82,7 +82,8 @@ public class Intake extends SubsystemBase {
   // }
 
   // public boolean hasCube() {
-  //   // TODO: determine if intake has a cube because the current is high -- this might be harder to
+  //   // TODO: determine if intake has a cube because the current is high -- this might be harder
+  // to
   //   // detect
   //   return false;
   // }
