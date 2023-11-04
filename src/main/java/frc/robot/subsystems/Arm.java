@@ -6,7 +6,15 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
 
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 //imports for position
@@ -24,11 +32,17 @@ public class Arm extends SubsystemBase {
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
-  amrPosLow = armMotor.set(CANSparkMax.Position, 0);
-  armPosMid = armMotor.set(CANSparkMax.Positino, 10);
-  armPosHigh = armMotor.set(CANSparkMax.Position, 20);
+
+  /*
+  private final CANSparkMax amrPosLow = armMotor.set(CANSparkMax.Position, 0);
+  private final CANSpakrMax armPosMid = armMotor.set(CANSparkMax.Positino, 10);
+  private final CANSparkMax armPosHigh = armMotor.set(CANSparkMax.Position, 20);
+  */
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
+
+  //SmartDashboard.putNumber("Arm Motor Ticks", intakeCanSparkMaxMotor.getVoltage());
+
   // public static final
 
   public Arm() {
@@ -44,6 +58,9 @@ public class Arm extends SubsystemBase {
     armMotor.setIdleMode(IdleMode.kBrake);
 
     // TODO: SET MOTOR CONTROLLER PID VALUES
+
+    //private final PIDController armMotorPID = new PIDController(ARM_CURRENT_LIMIT, armMotorID, ARM_CURRENT_LIMIT);
+
     // example syntax
     // // set PID coefficients
     // m_pidController.setP(kP);

@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
@@ -42,10 +44,16 @@ public class Intake extends SubsystemBase {
 
 
   // TODO: DEFINE INTAKE/OUTTAKE/HOLDING POWERS
+  private double intakePower;
+  private double outtakePower;
+  private double holdingPower;
 
+  private XboxController mController;
 
   public Intake() {
     // TODO: Initialize motor controller
+    mController = new XboxController(0);
+
     intakeMotor = new CANSparkMax(IntakeID, MotorType.kBrushless);
 
     // TODO: set current limit
@@ -69,7 +77,7 @@ public class Intake extends SubsystemBase {
 
   // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
   public void setHoldConePower() {
-    //intakeMotor.setIdleMode();
+    intakeMotor.setIdleMode(IdleMode.kBrake);
   }
 
    public void setHoldCubePower() {
