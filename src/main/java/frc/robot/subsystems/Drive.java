@@ -15,7 +15,11 @@ public class Drive extends SubsystemBase {
   private final int leftLeadID = 12;
   private final int leftFollowID = 13;
   private final int rightLeadMotorID = 22;
-  private final int rightFollowID= 23;
+  private final int rightFollowID = 23;
+  // private final int leftLeadID = 22;
+  // private final int leftFollowID = 23;
+  // private final int rightLeadMotorID = 12;
+  // private final int rightFollowID = 13;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
@@ -39,21 +43,22 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
-    rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadMotorID, MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
     rightFollowMotor.follow(rightLeadMotor);
 
-
-
     // class that contains all the wpilib control methods
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
   }
 
   public void tank(double left, double right) {
+    // System.out.println("left lefts" + leftLeadMotor.getFaults());
     drivetrain.tankDrive(left, right);
+    // leftLeadMotor.set(left);
+    // rightLeadMotor.set(right);
   }
 
   // TODO: other differential drive modes that can be considered later
