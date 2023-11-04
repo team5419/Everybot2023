@@ -24,7 +24,9 @@ public class Arm extends SubsystemBase {
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
-
+  amrPosLow = armMotor.set(CANSparkMax.Position, 0);
+  armPosMid = armMotor.set(CANSparkMax.Positino, 10);
+  armPosHigh = armMotor.set(CANSparkMax.Position, 20);
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
   // public static final
@@ -35,9 +37,11 @@ public class Arm extends SubsystemBase {
 
     // TODO: set current limit
     // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    armMotor.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     // m_arm.setIdleMode(IdleMode.kBrake);
+    armMotor.setIdleMode(IdleMode.kBrake);
 
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
