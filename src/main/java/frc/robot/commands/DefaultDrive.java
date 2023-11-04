@@ -32,7 +32,7 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.tank(controller.getLeftY(), controller.getRightY());
+    drivetrain.tank(controller.getLeftY()/2.0, controller.getRightY()/2.0);
   }
 
   // Called once the command ends or is interrupted.
