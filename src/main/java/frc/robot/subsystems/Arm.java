@@ -11,6 +11,7 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm extends SubsystemBase {
 
@@ -22,7 +23,7 @@ public class Arm extends SubsystemBase {
   private final RelativeEncoder m_encoder;
 
   // set motor current limits
-  private final int ARM_CURRENT_LIMIT = 30;
+  private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
 
@@ -37,6 +38,7 @@ public class Arm extends SubsystemBase {
     // set motor to brake mode
     m_Arm.setIdleMode(IdleMode.kBrake);
     m_encoder = m_Arm.getEncoder();
+    // SmartDashboard.putNumber("Arm Motor Ticks", m_Arm.getEncoder());
 
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
@@ -72,15 +74,18 @@ public class Arm extends SubsystemBase {
 
   public void zeroArmEncoder() {}
 
-  // TODO: DETECT IF ARM HAS HIT A HARDSTOP (check motor current)
+  // DETECT IF ARM HAS HIT A HARDSTOP (check motor current)
   public boolean hasHitHardstop() {
-    return false; // TODO: placeholder -- replace
+    if (m_Arm.getOutputCurrent() >= 10 /* TODO: placeholder -- replace */) {
+      return true;
+    }
+    return false;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
+    // UPDATE THE SHUFFLEBOARD ENTRIES
     ShuffleboardTab arm = Shuffleboard.getTab("Arm");
     arm.addNumber("Encoder angle", () -> m_encoder.getPosition());
   }
