@@ -49,13 +49,9 @@ public class Drive extends SubsystemBase {
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
   }
 
-  public void tank(double left, double right) {
+  public void arcade(double left, double right) {
     drivetrain.tankDrive(left, right);
   }
-
-  // TODO: other differential drive modes that can be considered later
-  // public void arcade() {}
-  // public void curvature() {}
 
   @Override
   public void periodic() {
