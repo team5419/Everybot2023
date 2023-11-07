@@ -15,9 +15,9 @@ public class Intake extends SubsystemBase {
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
 
-  // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
+  private int gamePiece = 0; // 0 for cubes, 1 for cones
 
-  // TODO: DEFINE INTAKE/OUTTAKE/HOLDING POWERS
+  // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
 
   public Intake() {
     // TODO: Initialize motor controller
@@ -29,60 +29,48 @@ public class Intake extends SubsystemBase {
 
   }
 
-  // This command requires the Intake subsystem
-  public CommandBase setRollerPowerCommand(double power) {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
+  // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
+  // Cubes and cones are fed in from different directions so the roller drive direction will be
+  // inverted
+  public void setHoldConePower() {}
+
+  public void setConeIntakePower() {}
+
+  public void setConeOuttakePower() {}
+
+  public void setHoldCubePower() {}
+
+  public void setCubeIntakePower() {}
+
+  public void setCubeOuttakePower() {}
+
+  public void stopIntake() {} // TODO: stop intake (set power to 0)
+
+  // this is only really called by drivers 
+  public CommandBase stopIntakeCmd() {
     return runOnce(
         () -> {
-          // TODO: set intake power (reference the constant defined above)
+          stopIntake()
         });
   }
 
-  // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  // public void setHoldConePower() {}
-
-  // public void setHoldCubePower() {}
-
-  // public CommandBase startConeIntakeCommand() {
-  //   // TODO: set power based on constant defined above
-  //   return setRollerPowerCommand();
-  // }
-
-  // public CommandBase startConeOuttakeCommand() {
-  //   // TODO: set power based on constant defined above
-  //   return setRollerPowerCommand();
-  // }
-
-  // // Cubes and cones are fed in from different directions so the roller drive direction will be
-  // // inverted
-  public CommandBase startCubeIntakeCommand() {
-    // TODO: set power based on constant defined above
-    return setRollerPowerCommand(0);
+  public void getGamePieceType() {
+    return gamePiece
   }
 
-  // public CommandBase startCubeOuttakeCommand() {
-  //   // TODO: set power based on constant defined above
-  //   return setRollerPowerCommand();
-  // }
+  public boolean hasCone() {
+    // TODO: determine if intake has a cone because the current is high
+    return false;
+  }
 
-  // public CommandBase stopIntakeCommand() {
-  //   return setRollerPowerCommand(0);
-  // }
-
-  // public boolean hasCone() {
-  //   // TODO: determine if intake has a cone because the current is high
-  //   return false;
-  // }
-
-  // public boolean hasCube() {
-  //   // TODO: determine if intake has a cube because the current is high -- this might be harder to
-  //   // detect
-  //   return false;
-  // }
+  public boolean hasCube() {
+    // TODO: determine if intake has a cube because the current is high -- this might be harder to
+    // detect
+    return false;
+  }
 
   // @Override
   // public void periodic() {
-  //   // This method will be called once per scheduler run
+  //   // TODO: update shuffleboard entries
   // }
 }

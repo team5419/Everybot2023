@@ -18,7 +18,6 @@ public class Arm extends SubsystemBase {
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
-  // public static final
 
   public Arm() {
     // TODO: Initialize motor controller
@@ -29,6 +28,7 @@ public class Arm extends SubsystemBase {
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     // m_arm.setIdleMode(IdleMode.kBrake);
 
+    /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
     // // set PID coefficients
@@ -50,8 +50,13 @@ public class Arm extends SubsystemBase {
     // SmartDashboard.putNumber("Set Rotations", 0);
 
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
+     /* END TODO; ARM POSITION CONTROL TASK */
   }
 
+  public void setArmPower() {}
+
+
+  /* TODO; ARM POSITION CONTROL TASK */
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
   // Other classes/commands do not have access to the private motor object so you have to make it
   // accessible
@@ -74,4 +79,5 @@ public class Arm extends SubsystemBase {
 
     // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
   }
+  /* END TODO; ARM POSITION CONTROL TASK */
 }

@@ -6,22 +6,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Arm;
 
 /** An example command that uses an example subsystem. */
-public class DefaultDrive extends CommandBase {
-  private final Drive drivetrain;
+public class ManualArm extends CommandBase {
+  private final Arm arm;
   private final CommandXboxController controller;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DefaultDrive(Drive drivetrain, CommandXboxController controller) {
-    this.drivetrain = drivetrain;
+  public ManualArm(Arm arm, CommandXboxController controller) {
+    this.arm = arm;
     this.controller = controller;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.drivetrain);
+    addRequirements(this.arm);
   }
 
   // Called when the command is initially scheduled.
@@ -31,15 +31,13 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // TODO: change this to arcade drive
-    drivetrain.tank(controller.getLeftY(), controller.getRightY());
+    // TODO: apply power to arm based on controller left Y
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // TODO: modify this for arcade drive
-    drivetrain.tank(0, 0);
+    // TODO: stop applying power (set to 0)
   }
 
   // Returns true when the command should end.

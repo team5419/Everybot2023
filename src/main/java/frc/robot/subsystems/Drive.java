@@ -14,7 +14,7 @@ public class Drive extends SubsystemBase {
   // TODO: SET CAN ID(s)
   private final int leftLeadID = 12;
   private final int leftFollowID = 13;
-  private final int rightLeadMotorID = 22;
+  private final int rightLeadID = 22;
   private final int rightFollowID= 23;
 
   private final CANSparkMax leftLeadMotor;
@@ -39,14 +39,14 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
-    rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadID,MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
     rightFollowMotor.follow(rightLeadMotor);
 
-
+    // TODO: set motor inversion as necessary here! (left side)
 
     // class that contains all the wpilib control methods
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
@@ -56,9 +56,10 @@ public class Drive extends SubsystemBase {
     drivetrain.tankDrive(left, right);
   }
 
-  // TODO: other differential drive modes that can be considered later
-  // public void arcade() {}
-  // public void curvature() {}
+  // TODO: add arcade drive accessor; add a speed multiplier for slow mode
+  public void arcade(double fwd, double steer, boolean slowMode) {
+    // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
+  }
 
   @Override
   public void periodic() {

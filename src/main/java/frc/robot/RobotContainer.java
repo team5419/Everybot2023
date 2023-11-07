@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants.OperatorConstants;
+// import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.subsystems.Arm;
@@ -22,13 +22,15 @@ public class RobotContainer {
   private final Drive drive = new Drive();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_driverController = new CommandXboxController(0);
+  private final CommandXboxController m_codriverController = new CommandXboxController(1);
 
   // TODO: Declare and initialize the command(s)
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
-  CommandBase highCone = new ArmToPosition(arm, 0, 0);
-  CommandBase cubeIntake = intake.startCubeIntakeCommand();
+  CommandBase manualArm = new ManualArm(arm, m_codriverController);
+  CommandBase stopIntake = intake.stopIntakeCmd();
+  CommandBase cubeIntake = new IntakeCube();
+  // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -46,12 +48,20 @@ public class RobotContainer {
     // Configure the default command for the drive subsystem
     // Scheduler will use the default command if no other command is using the subsystem
     drive.setDefaultCommand(defaultDrive);
+    arm.setDefaultCommand(manualArm);
 
-    // TODO: MAP GAMEPAD BUTTONS TO COMMANDS
+    // MAP GAMEPAD BUTTONS TO COMMANDS
     // these are examples -- feel free to remap
-    m_driverController.povUp().onTrue(highCone);
+
+    /* TODO: ARM POSITION CONTROL */
+    // use DPAD for positions, may need to use game piece int to adjust target height
+    // m_codriverController.povUp().onTrue(highCone);
+
     // whileTrue -- schedules when pressed, cancels when released
-    m_driverController.a().whileTrue(cubeIntake);
+    /* TODO: INTAKE - can adjust mapping */
+    m_codriverController.x().whileTrue(cubeIntake);
+    m_codriverController.b().onTrue(stopIntake);
+
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
