@@ -85,7 +85,7 @@ public class Intake extends SubsystemBase {
 
   public boolean hasCone() {
     // TODO: determine if intake has a cone because the current is high
-    if (m_Intake.getOutputCurrent() >= 10 /* dummy value */) {
+    if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
       return true;
     }
     return false;

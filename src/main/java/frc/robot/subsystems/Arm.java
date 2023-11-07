@@ -26,9 +26,12 @@ public class Arm extends SubsystemBase {
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
+  // test robot to count ticks
+  // private final int lowPosition = 0;
+  // private final int midPosition = 0;
+  // private final int highPosition = 0;
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
-  // public static final
 
   public Arm() {
     // Initialize motor controller
@@ -37,8 +40,9 @@ public class Arm extends SubsystemBase {
     m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
     // set motor to brake mode
     m_Arm.setIdleMode(IdleMode.kBrake);
+
     m_encoder = m_Arm.getEncoder();
-    // SmartDashboard.putNumber("Arm Motor Ticks", m_Arm.getEncoder());
+    SmartDashboard.putNumber("Arm Motor Ticks", m_Arm.getEncoder().getPosition());
 
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
@@ -85,7 +89,7 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // UPDATE THE SHUFFLEBOARD ENTRIES
+    // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
     ShuffleboardTab arm = Shuffleboard.getTab("Arm");
     arm.addNumber("Encoder angle", () -> m_encoder.getPosition());
   }
