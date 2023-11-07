@@ -25,18 +25,18 @@ public class IntakeCube extends CommandBase {
   @Override
   public void initialize() {
     // TODO: set game piece int to 0 for cube
+    // TODO: use appropriate function from Intake.java class (intake.set__Power)
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // TODO: use one-line commands from Intake.java class (intake.set)
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // TODO: reduce to a low holding power
+    // TODO: reduce to a low holding power (use function from Intake.java class)
   }
 
   // Returns true when the command should end.

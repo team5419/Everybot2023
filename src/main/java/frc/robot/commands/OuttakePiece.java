@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 /** An example command that uses an example subsystem. */
-public class IntakeCube extends CommandBase {
+public class OuttakePiece extends CommandBase {
   private final Intake intake;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCube(Intake intake) {
+  public OuttakePiece(Intake intake) {
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.intake);
@@ -24,13 +24,13 @@ public class IntakeCube extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // TODO: set game piece boolean to 0 for cube
+    // TODO: apply scoring power
+    // TODO: apply power in + or - direction depending on intake.gamePiece int (0 cube, 1 cone)
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // TODO: apply cube intake power, which is inverted from cone intake power
   }
 
   // Called once the command ends or is interrupted.

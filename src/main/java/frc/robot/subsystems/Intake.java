@@ -32,7 +32,9 @@ public class Intake extends SubsystemBase {
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
   // Cubes and cones are fed in from different directions so the roller drive direction will be
   // inverted
-  public void setHoldConePower() {}
+  public void setHoldConePower() {
+    // intakeMotor.set(0.08) // or something
+  }
 
   public void setConeIntakePower() {}
 
