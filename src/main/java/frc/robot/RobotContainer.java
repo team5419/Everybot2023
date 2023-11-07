@@ -25,7 +25,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final CommandXboxController m_codriverController = 
-      new CommandXboxController(OperatorConstants.kDriverControllerPort /* TODO: fix this */);
+      new CommandXboxController(OperatorConstants.kCodriverControllerPort);
 
   // Declare and initialize the commands
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
@@ -50,13 +50,11 @@ public class RobotContainer {
     drive.setDefaultCommand(defaultDrive);
 
     // TODO: MAP GAMEPAD BUTTONS TO COMMANDS
-    // these are examples -- feel free to remap
-    m_driverController.povUp().onTrue(highCone);
     // whileTrue -- schedules when pressed, cancels when released
+    m_driverController.povUp().onTrue(highCone);
     m_driverController.a().whileTrue(cubeIntake);
     //m_driverController.y().onTrue(zeroGyro);
-    // TODO: add arm controls on codriver controller (like tank drive but with arm)
-
+    
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to

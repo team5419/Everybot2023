@@ -68,8 +68,7 @@ public class Arm extends SubsystemBase {
   }
 
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
-  // Other classes/commands do not have access to the private motor object so you have to make it
-  // accessible
+  // Other classes/commands do not have access to the private motor object so you have to make it accessible
   public void setArmTarget() {}
 
   public void getArmPosition() {}

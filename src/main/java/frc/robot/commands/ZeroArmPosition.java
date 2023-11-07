@@ -34,6 +34,9 @@ public class ZeroArmPosition extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // TODO: IF NOT INTERRUPTED -- ZERO THE ARM ENCODER AND TURN THE ARM MOTOR OFF
+    if (interrupted == false) {
+      
+    }
   }
 
   // Returns true when the command should end.
