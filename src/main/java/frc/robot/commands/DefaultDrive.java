@@ -14,6 +14,7 @@ public class DefaultDrive extends CommandBase {
   private final CommandXboxController controller;
   public double steerConstant = 1.0;
   public double rotationConstant = 1.0;
+  public double slowConstant = 1.0;
   /**
    * Creates a new ExampleCommand.
    *
@@ -33,7 +34,12 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.arcade(-controller.getLeftY()/steerConstant + controller.getRightX()/rotationConstant, controller.getLeftY()/steerConstant + controller.getRightX()/rotationConstant);
+    if (controller.rightBumper().getAsBoolean()) {
+      slowConstant = 0.5;
+    } else {
+      slowConstant = 1.0;
+    }
+    drivetrain.arcade((-controller.getLeftY() / steerConstant + controller.getRightX() / rotationConstant) * slowConstant, (controller.getLeftY() / steerConstant + controller.getRightX() / rotationConstant) * slowConstant);
   }
 
   // Called once the command ends or is interrupted.
