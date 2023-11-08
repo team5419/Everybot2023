@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
-  private final int intakeMotorID = 23;
+  private final int intakeMotorID = 7;
   // TODO: DECLARE MOTOR (CANSparkMax object)
 
   private CANSparkMax intake_m;
