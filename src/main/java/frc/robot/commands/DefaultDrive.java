@@ -12,8 +12,8 @@ import frc.robot.subsystems.Drive;
 public class DefaultDrive extends CommandBase {
   private final Drive drivetrain;
   private final CommandXboxController controller;
-  public double steerConstant = 1.0;
-  public double rotationConstant = 1.0;
+  public double steerConstant = 0.5;
+  public double speedConstant = 0.7;
   public double slowConstant = 1.0;
   /**
    * Creates a new ExampleCommand.
@@ -39,7 +39,7 @@ public class DefaultDrive extends CommandBase {
     } else {
       slowConstant = 1.0;
     }
-    drivetrain.arcade((-controller.getLeftY() / steerConstant + controller.getRightX() / rotationConstant) * slowConstant, (controller.getLeftY() / steerConstant + controller.getRightX() / rotationConstant) * slowConstant);
+    drivetrain.arcade((-controller.getLeftY()*speedConstant + controller.getRightX() / steerConstant) * slowConstant, (controller.getLeftY() / speedConstant + controller.getRightX() / steerConstant) * slowConstant);
   }
 
   // Called once the command ends or is interrupted.

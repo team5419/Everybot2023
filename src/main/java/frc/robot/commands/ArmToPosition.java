@@ -21,7 +21,7 @@ public class ArmToPosition extends CommandBase {
   @Override
   public void initialize() {
     // TODO: SET GOAL POSITION ON MOTOR
-    // private final int goalPosition = 0;
+    // target = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
