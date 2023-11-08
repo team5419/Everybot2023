@@ -13,7 +13,7 @@ public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
-  private static final CANSparkMax motor;
+  //private static final CANSparkMax;
 
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
@@ -26,7 +26,7 @@ public class Intake extends SubsystemBase {
     // TODO: Initialize motor controller
 
     // TODO: set current limit
-    // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
+     m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
 
@@ -43,9 +43,9 @@ public class Intake extends SubsystemBase {
   // }
 
   // // TODO: SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  // public void setHoldConePower() {}
+  public void setHoldConePower() {}
 
-  // public void setHoldCubePower() {}
+  public void setHoldCubePower() {}
 
   // public CommandBase startConeIntakeCommand() {
   //   // TODO: set power based on constant defined above
