@@ -5,28 +5,37 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 
 public class Arm extends SubsystemBase {
 
   // TODO: ADD AND SET CAN ID(s)
+  private final int CAN_ID = 5;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
+  private CANSparkMax arm; 
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
+  
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
+  // public static final
 
   public Arm() {
     // TODO: Initialize motor controller
+    arm = new CANSparkMax(CAN_ID, MotorType.kBrushless);
 
     // TODO: set current limit
-    // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
-    // m_arm.setIdleMode(IdleMode.kBrake);
+    arm.setIdleMode(IdleMode.kBrake);
 
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
@@ -38,6 +47,7 @@ public class Arm extends SubsystemBase {
     // m_pidController.setIZone(kIz);
     // m_pidController.setFF(kFF);
     // m_pidController.setOutputRange(kMinOutput, kMaxOutput);
+    
 
     // // display PID coefficients on SmartDashboard
     // SmartDashboard.putNumber("P Gain", kP);
@@ -50,13 +60,12 @@ public class Arm extends SubsystemBase {
     // SmartDashboard.putNumber("Set Rotations", 0);
 
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
-     /* END TODO; ARM POSITION CONTROL TASK */
   }
 
-  public void setArmPower() {}
-
-
-  /* TODO; ARM POSITION CONTROL TASK */
+  public void setArmPower(double power)
+  {
+    arm.set(power);
+  }
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
   // Other classes/commands do not have access to the private motor object so you have to make it
   // accessible
@@ -79,5 +88,4 @@ public class Arm extends SubsystemBase {
 
     // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
   }
-  /* END TODO; ARM POSITION CONTROL TASK */
 }
