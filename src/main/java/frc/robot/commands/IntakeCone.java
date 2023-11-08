@@ -15,7 +15,7 @@ public class IntakeCone extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCube(Intake intake) {
+  public IntakeCone(Intake intake) {
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.intake);
