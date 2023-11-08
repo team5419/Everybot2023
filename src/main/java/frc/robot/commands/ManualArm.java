@@ -39,6 +39,7 @@ public class ManualArm extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // TODO: stop applying power (set to 0)
+    arm.setArmPower(0);
   }
 
   // Returns true when the command should end.
