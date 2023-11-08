@@ -32,11 +32,8 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.rightBumper().getAsBoolean()) {
-      drivetrain.arcade(controller.getLeftY()*0.4, controller.getRightX()*0.4, true);
-    } else {
-      drivetrain.arcade(controller.getLeftY()*0.7, controller.getRightX()*0.7, false);
-    }
+    boolean slowMode = controller.rightBumper().getAsBoolean();
+    drivetrain.arcade(-controller.getLeftY()*0.7, controller.getRightX()*0.7, slowMode);
   }
 
   // Called once the command ends or is interrupted.

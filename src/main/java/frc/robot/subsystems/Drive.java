@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
+// import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -65,6 +65,11 @@ public class Drive extends SubsystemBase {
   // add arcade drive accessor; add a speed multiplier for slow mode
   public void arcade(double fwd, double steer, boolean slowMode) {
     drivetrain.arcadeDrive(fwd, steer, slowMode);
+    if (slowMode == true) {
+      drivetrain.arcadeDrive(fwd/2, steer/2);
+    } else {
+      drivetrain.arcadeDrive(fwd, steer);
+    }
     // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
   }
 
