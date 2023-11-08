@@ -52,12 +52,12 @@ public class Intake extends SubsystemBase {
   public CommandBase stopIntakeCmd() {
     return runOnce(
         () -> {
-          stopIntake()
+          stopIntake();
         });
   }
 
-  public void getGamePieceType() {
-    return gamePiece
+  public int getGamePieceType() {
+    return gamePiece;
   }
 
   public boolean hasCone() {

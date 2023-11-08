@@ -12,6 +12,7 @@ import frc.robot.subsystems.Drive;
 public class DefaultDrive extends CommandBase {
   private final Drive drivetrain;
   private final CommandXboxController controller;
+
   /**
    * Creates a new ExampleCommand.
    *
@@ -31,15 +32,18 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // TODO: change this to arcade drive
-    drivetrain.tank(controller.getLeftY(), controller.getRightY());
+    if (controller.rightBumper().getAsBoolean()) {
+      drivetrain.arcade(controller.getLeftY()*0.4, controller.getRightX()*0.4, true);
+    } else {
+      drivetrain.arcade(controller.getLeftY()*0.7, controller.getRightX()*0.7, false);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // TODO: modify this for arcade drive
-    drivetrain.tank(0, 0);
+    // modify this for arcade drive
+    drivetrain.arcade(0, 0, false);
   }
 
   // Returns true when the command should end.

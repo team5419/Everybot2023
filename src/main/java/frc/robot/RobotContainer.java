@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 // import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeCube;
+import frc.robot.commands.ManualArm;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
@@ -29,7 +31,7 @@ public class RobotContainer {
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase manualArm = new ManualArm(arm, m_codriverController);
   CommandBase stopIntake = intake.stopIntakeCmd();
-  CommandBase cubeIntake = new IntakeCube();
+  // CommandBase cubeIntake = new IntakeCube();
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -59,7 +61,7 @@ public class RobotContainer {
 
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
-    m_codriverController.x().whileTrue(cubeIntake);
+    // m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.b().onTrue(stopIntake);
 
 
