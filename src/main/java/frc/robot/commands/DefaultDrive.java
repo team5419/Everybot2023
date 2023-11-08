@@ -15,6 +15,7 @@ public class DefaultDrive extends CommandBase {
   public double steerConstant = 0.5;
   public double speedConstant = 0.7;
   public double slowConstant = 1.0;
+
   /**
    * Creates a new ExampleCommand.
    *

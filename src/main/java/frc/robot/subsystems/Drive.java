@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.SubsystemBase; 
 
 public class Drive extends SubsystemBase {
   // Define member variables
@@ -22,6 +22,11 @@ public class Drive extends SubsystemBase {
 
   private final CANSparkMax rightLeadMotor;
   private final CANSparkMax rightFollowMotor;
+
+  //TODO: find actual values for these
+  public int stallLimit = 60;
+  public int freeLimit = 60;
+  public double rampTime = 0.5;
 
   DifferentialDrive drivetrain;
 
@@ -40,6 +45,12 @@ public class Drive extends SubsystemBase {
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
     rightLeadMotor = new CANSparkMax(rightLeadID, MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
+
+    // setting current limits for the motors
+    leftLeadMotor.setSmartCurrentLimit(stallLimit, freeLimit);
+    leftLeadMotor.setOpenLoopRampRate(rampTime);
+    rightLeadMotor.setSmartCurrentLimit(stallLimit, freeLimit);
+    rightLeadMotor.setOpenLoopRampRate(rampTime);
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
