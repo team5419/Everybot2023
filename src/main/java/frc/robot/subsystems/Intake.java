@@ -34,6 +34,8 @@ public class Intake extends SubsystemBase {
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     intakeMotor.setIdleMode(IdleMode.kBrake);
+
+    intakeMotor.setInverted(true);
   }
 
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
@@ -44,11 +46,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void setConeIntakePower() {
-    intakeMotor.set(1.0);
+    intakeMotor.set(0.5);
   }
 
   public void setConeOuttakePower() {
-    intakeMotor.set(-1.0);
+    intakeMotor.set(-0.5);
   }
 
   public void setCubeHoldPower() {
@@ -56,11 +58,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void setCubeIntakePower() {
-    intakeMotor.set(-1.0);
+    intakeMotor.set(-0.5);
   }
 
   public void setCubeOuttakePower() {
-    intakeMotor.set(1.0);
+    intakeMotor.set(0.5);
   }
 
   public void stopIntake() {
