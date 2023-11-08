@@ -4,29 +4,42 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Arm extends SubsystemBase {
+  private final CANSparkMax arm;
 
   // TODO: ADD AND SET CAN ID(s)
+  private final int CAN_ID = 5;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
-
+  private CANSparkMax spark_motor;
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
+
+  //private final int low_arm_pos;
+  //private final int med_arm_pos;
+  //private final int high_arm_pos;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
 
   public Arm() {
+    
+    arm = new CANSparkMax(CAN_ID, MotorType.kBrushless);
     // TODO: Initialize motor controller
 
     // TODO: set current limit
-    // m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
-    // m_arm.setIdleMode(IdleMode.kBrake);
+    arm.setIdleMode(IdleMode.kBrake);
 
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
@@ -53,14 +66,19 @@ public class Arm extends SubsystemBase {
      /* END TODO; ARM POSITION CONTROL TASK */
   }
 
-  public void setArmPower() {}
+  public void setArmPower(double power) {
+    arm.set(power);
+  }
 
 
   /* TODO; ARM POSITION CONTROL TASK */
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
   // Other classes/commands do not have access to the private motor object so you have to make it
   // accessible
-  public void setArmTarget() {}
+  public void setArmTarget() {
+
+    
+  }
 
   public void getArmPosition() {}
   // TODO: ADD MOTOR ACCESSORS FOR ZEROING MOTOR POWER AND MOTOR ENCODER
