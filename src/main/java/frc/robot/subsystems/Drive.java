@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -63,29 +63,29 @@ public class Drive extends SubsystemBase {
   }
 
   // add arcade drive accessor; add a speed multiplier for slow mode
-  public void arcade(double fwd, double steer, boolean slowMode) {
-    drivetrain.arcadeDrive(fwd, steer, slowMode);
+  public void arcade(double steer, double fwd, boolean slowMode) {
+    drivetrain.arcadeDrive(steer, fwd, slowMode);
     if (slowMode == true) {
-      drivetrain.arcadeDrive(fwd/2, steer/2);
+      drivetrain.arcadeDrive(steer/2, fwd/2);
     } else {
-      drivetrain.arcadeDrive(fwd, steer);
+      drivetrain.arcadeDrive(steer, fwd);
     }
     // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
   }
 
-  // public void setDriveToBrake() {
-  //   leftLeadMotor.setIdleMode(IdleMode.kBrake);
-  //   leftFollowMotor.setIdleMode(IdleMode.kBrake);
-  //   rightLeadMotor.setIdleMode(IdleMode.kBrake);
-  //   rightFollowMotor.setIdleMode(IdleMode.kBrake);
-  // }
+  public void setDriveToBrake() {
+    leftLeadMotor.setIdleMode(IdleMode.kBrake);
+    leftFollowMotor.setIdleMode(IdleMode.kBrake);
+    rightLeadMotor.setIdleMode(IdleMode.kBrake);
+    rightFollowMotor.setIdleMode(IdleMode.kBrake);
+  }
 
-  // public void setDriveToCoast() {
-  //   leftLeadMotor.setIdleMode(IdleMode.kCoast);
-  //   leftFollowMotor.setIdleMode(IdleMode.kCoast);
-  //   rightLeadMotor.setIdleMode(IdleMode.kCoast);
-  //   rightFollowMotor.setIdleMode(IdleMode.kCoast);
-  // }
+  public void setDriveToCoast() {
+    leftLeadMotor.setIdleMode(IdleMode.kCoast);
+    leftFollowMotor.setIdleMode(IdleMode.kCoast);
+    rightLeadMotor.setIdleMode(IdleMode.kCoast);
+    rightFollowMotor.setIdleMode(IdleMode.kCoast);
+  }
 
   @Override
   public void periodic() {
