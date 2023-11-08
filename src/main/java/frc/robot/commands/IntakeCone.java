@@ -15,7 +15,7 @@ public class IntakeCone extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCube(Intake intake) {
+  public IntakeCone(Intake intake) {
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.intake);
@@ -25,8 +25,10 @@ public class IntakeCone extends CommandBase {
   @Override
   public void initialize() {
     // TODO: set game piece int to 1 for cone
+    intake.setGamePieceType(1);
     // TODO: apply cone intake power, which is inverted from cube intake power
     //       use appropriate function from Intake.java class (intake.set__Power)
+    intake.setConeIntakePower();
 
   }
 
@@ -39,6 +41,7 @@ public class IntakeCone extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // TODO: reduce to a low holding power
+    intake.stopIntake();
   }
 
   // Returns true when the command should end.
