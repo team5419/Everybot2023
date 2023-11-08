@@ -27,7 +27,8 @@ public class IntakeCone extends CommandBase {
     // TODO: set game piece int to 1 for cone
     // TODO: apply cone intake power, which is inverted from cube intake power
     //       use appropriate function from Intake.java class (intake.set__Power)
-
+    intake.setGamePieceType(1);
+    intake.setConeIntakePower();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,6 +39,7 @@ public class IntakeCone extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.setConeHoldPower();
     // TODO: reduce to a low holding power
   }
 

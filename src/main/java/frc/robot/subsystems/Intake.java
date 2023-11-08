@@ -4,14 +4,20 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
-  // TODO: SET CAN ID
+  // TODO: ADD AND SET CAN ID(s)
+  private final int intakeID = 6;
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
-
+  private CANSparkMax intakeMotor; 
+  
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 20;
 
@@ -21,32 +27,45 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     // TODO: Initialize motor controller
+    intakeMotor = new CANSparkMax(intakeID, MotorType.kBrushless);
 
     // TODO: set current limit
-    // m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
+    intakeMotor.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
-
+    intakeMotor.setIdleMode(IdleMode.kBrake);
   }
 
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
   // Cubes and cones are fed in from different directions so the roller drive direction will be
   // inverted
-  public void setHoldConePower() {
-    // intakeMotor.set(0.08) // or something
+  public void setConeHoldPower() {
+    intakeMotor.set(0.0);
   }
 
-  public void setConeIntakePower() {}
+  public void setConeIntakePower() {
+    intakeMotor.set(1.0);
+  }
 
-  public void setConeOuttakePower() {}
+  public void setConeOuttakePower() {
+    intakeMotor.set(-1.0);
+  }
 
-  public void setHoldCubePower() {}
+  public void setCubeHoldPower() {
+    intakeMotor.set(0.0);
+  }
 
-  public void setCubeIntakePower() {}
+  public void setCubeIntakePower() {
+    intakeMotor.set(-1.0);
+  }
 
-  public void setCubeOuttakePower() {}
+  public void setCubeOuttakePower() {
+    intakeMotor.set(1.0);
+  }
 
-  public void stopIntake() {} // TODO: stop intake (set power to 0)
+  public void stopIntake() {
+    intakeMotor.set(0.0);
+  }
 
   // this is only really called by drivers 
   public CommandBase stopIntakeCmd() {
@@ -58,6 +77,9 @@ public class Intake extends SubsystemBase {
 
   public int getGamePieceType() {
     return gamePiece;
+  }
+  public void setGamePieceType(int newGamePiece) {
+    gamePiece = newGamePiece;
   }
 
   public boolean hasCone() {

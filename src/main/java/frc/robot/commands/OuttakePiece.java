@@ -24,6 +24,12 @@ public class OuttakePiece extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    int gamePiece = intake.getGamePieceType();
+    if( gamePiece == 1 ) {
+      intake.setConeOuttakePower();
+    } else if( gamePiece == 0 ) {
+      intake.setCubeOuttakePower();
+    }
     // TODO: apply scoring power
     // TODO: apply power in + or - direction depending on intake.gamePiece int (0 cube, 1 cone)
   }
@@ -37,6 +43,12 @@ public class OuttakePiece extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // TODO: reduce to a low holding power
+    int gamePiece = intake.getGamePieceType();
+    if( gamePiece == 1 ) {
+      intake.setConeHoldPower();
+    } else if( gamePiece == 0 ) {
+      intake.setCubeHoldPower();
+    }
   }
 
   // Returns true when the command should end.
