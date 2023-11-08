@@ -40,8 +40,9 @@ public class DefaultDrive extends CommandBase {
     } else {
       slowConstant = 1.0;
     }
-    drivetrain.arcade((-controller.getLeftY()*speedConstant + controller.getRightX() / steerConstant) * slowConstant, (controller.getLeftY() / speedConstant + controller.getRightX() / steerConstant) * slowConstant);
-  }
+    // drivetrain.arcade((-controller.getLeftY()*speedConstant + controller.getRightX() / steerConstant) * slowConstant, (controller.getLeftY() / speedConstant + controller.getRightX() / steerConstant) * slowConstant);
+    drivetrain.arcade(controller.getLeftY(), controller.getLeftX());
+  } 
 
   // Called once the command ends or is interrupted.
   @Override

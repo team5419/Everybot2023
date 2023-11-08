@@ -61,7 +61,8 @@ public class Drive extends SubsystemBase {
   }
 
   public void arcade(double left, double right) {
-    drivetrain.tankDrive(left, right);
+    // drivetrain.tankDrive(left, right);
+    drivetrain.arcadeDrive(left, right);
   }
 
   @Override
