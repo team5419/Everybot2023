@@ -32,6 +32,7 @@ public class ManualArm extends CommandBase {
   @Override
   public void execute() {
     // TODO: apply power to arm based on controller left Y
+    arm.setArmPower(controller.getLeftY());
   }
 
   // Called once the command ends or is interrupted.
