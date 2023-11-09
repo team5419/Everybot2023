@@ -39,37 +39,30 @@ public class Intake extends SubsystemBase {
   }
 
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  // Cubes and cones are fed in from different directions so the roller drive direction will be
-  // inverted
+  // Cubes and cones are fed in from different directions so the roller drive direction will be inverted
   public void setConeHoldPower() {
     intakeMotor.set(0.2);
   }
-
   public void setConeIntakePower() {
     intakeMotor.set(0.7);
   }
-
   public void setConeOuttakePower() {
     intakeMotor.set(-0.7);
   }
-
   public void setCubeHoldPower() {
     intakeMotor.set(0.0);
   }
-
   public void setCubeIntakePower() {
     intakeMotor.set(-0.5);
   }
-
   public void setCubeOuttakePower() {
     intakeMotor.set(0.5);
   }
-
   public void stopIntake() {
     intakeMotor.set(0.0);
   }
 
-  // this is only really called by drivers 
+  // this is only really called by drivers in case rollers are running and we don't want them to
   public CommandBase stopIntakeCmd() {
     return runOnce(
         () -> {
