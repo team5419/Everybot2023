@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
@@ -27,6 +28,7 @@ public class Drive extends SubsystemBase {
   public int stallLimit = 60;
   public int freeLimit = 60;
   public double rampTime = 0.5;
+  private boolean brakeMode = false;
 
   DifferentialDrive drivetrain;
 
@@ -57,6 +59,12 @@ public class Drive extends SubsystemBase {
 
     // set motor inversion as necessary here! (left side)
     leftFollowMotor.setInverted(true);
+    
+    if( brakeMode ) { 
+      setDriveToBrake(); 
+    } else { 
+      setDriveToCoast();
+    }
 
     // class that contains all the wpilib control methods
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
@@ -65,7 +73,7 @@ public class Drive extends SubsystemBase {
   // add arcade drive accessor; add a speed multiplier for slow mode
   public void arcade(double steer, double fwd, boolean slowMode) {
     if (slowMode == true) {
-      drivetrain.arcadeDrive(steer/2, fwd/2);
+      drivetrain.arcadeDrive(steer * 0.7, fwd * 0.5);
     } else {
       drivetrain.arcadeDrive(steer, fwd);
     }
@@ -73,6 +81,7 @@ public class Drive extends SubsystemBase {
   }
 
   public void setDriveToBrake() {
+    brakeMode = true;
     leftLeadMotor.setIdleMode(IdleMode.kBrake);
     leftFollowMotor.setIdleMode(IdleMode.kBrake);
     rightLeadMotor.setIdleMode(IdleMode.kBrake);
@@ -80,11 +89,19 @@ public class Drive extends SubsystemBase {
   }
 
   public void setDriveToCoast() {
+    brakeMode = false;
     leftLeadMotor.setIdleMode(IdleMode.kCoast);
     leftFollowMotor.setIdleMode(IdleMode.kCoast);
     rightLeadMotor.setIdleMode(IdleMode.kCoast);
     rightFollowMotor.setIdleMode(IdleMode.kCoast);
   }
+
+  // public CommandBase toggleBrakeModeCmd() {
+  //   return runOnce(
+  //       () -> {
+  //         if( brakeMode ) { setDriveToCoast(); } else { setDriveToBrake(); }
+  //       });
+  // }
 
   @Override
   public void periodic() {

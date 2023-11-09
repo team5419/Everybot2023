@@ -33,7 +33,7 @@ public class DefaultDrive extends CommandBase {
   @Override
   public void execute() {
     boolean slowMode = controller.rightBumper().getAsBoolean();
-    drivetrain.arcade(controller.getRightX()*0.7, controller.getLeftY()*0.7, slowMode);
+    drivetrain.arcade(controller.getRightX()*0.8, controller.getLeftY()*0.8, slowMode);
   }
 
   // Called once the command ends or is interrupted.
