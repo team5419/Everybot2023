@@ -63,10 +63,15 @@ public class Drive extends SubsystemBase {
   }
 
   // add arcade drive accessor; add a speed multiplier for slow mode
-  public void arcade(double steer, double fwd, boolean slowMode) {
+  public void arcade(double steer, double fwd, boolean slowMode, boolean fastMode) {
     drivetrain.arcadeDrive(steer, fwd, slowMode);
     if (slowMode == true) {
       drivetrain.arcadeDrive(steer/2, fwd/2);
+    } else {
+      drivetrain.arcadeDrive(steer, fwd);
+    }
+    if (fastMode == true) {
+      drivetrain.arcadeDrive(steer*2, fwd);
     } else {
       drivetrain.arcadeDrive(steer, fwd);
     }

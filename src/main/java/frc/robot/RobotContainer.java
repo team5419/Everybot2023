@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 // import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.ArmToPosition;
+// import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeCone;
 import frc.robot.commands.IntakeCube;
 import frc.robot.commands.ManualArm;
+import frc.robot.commands.OuttakePiece;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
@@ -31,8 +33,9 @@ public class RobotContainer {
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase manualArm = new ManualArm(arm, m_codriverController);
   CommandBase stopIntake = intake.stopIntakeCmd();
-  // CommandBase cubeIntake = new IntakeCube();
-  // TODO: IntakeCone, OuttakePiece
+  CommandBase cubeIntake = new IntakeCube(intake);
+  CommandBase coneIntake = new IntakeCone(intake);
+  CommandBase gpOuttake = new OuttakePiece(intake);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -62,8 +65,10 @@ public class RobotContainer {
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
     // m_codriverController.x().whileTrue(cubeIntake);
+    m_codriverController.a().whileTrue(coneIntake);
+    m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.b().onTrue(stopIntake);
-
+    m_driverController.x().onTrue(gpOuttake);
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
@@ -80,5 +85,11 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
     return Commands.none();
+  }
+  public void setDriveToBrake() {
+      drive.setDriveToBrake();
+  }
+  public void setDriveToCoast() {
+      drive.setDriveToCoast();
   }
 }

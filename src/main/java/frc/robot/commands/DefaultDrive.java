@@ -33,14 +33,15 @@ public class DefaultDrive extends CommandBase {
   @Override
   public void execute() {
     boolean slowMode = controller.rightBumper().getAsBoolean();
-    drivetrain.arcade(controller.getRightX()*0.7, controller.getLeftY()*0.7, slowMode);
+    boolean fastTurnMode = controller.leftBumper().getAsBoolean();
+    drivetrain.arcade(controller.getRightX()*0.7, controller.getLeftY()*0.7, slowMode, fastTurnMode);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     // modify this for arcade drive
-    drivetrain.arcade(0, 0, false);
+    drivetrain.arcade(0, 0, false, false);
   }
 
   // Returns true when the command should end.
