@@ -97,7 +97,7 @@ public class Drive extends SubsystemBase {
   }
 
   public CommandBase toggleBrakeModeCmd() {
-    return runOnce(
+    return commands.runOnce(
         () -> {
           if( brakeMode ) { setDriveToCoast(); } else { setDriveToBrake(); }
         });
