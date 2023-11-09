@@ -31,7 +31,7 @@ public class RobotContainer {
 
   // TODO: Declare and initialize the command(s)
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
-  // CommandBase toggleBrakeMode = drive.toggleBrakeModeCmd();
+  CommandBase toggleBrakeMode = drive.toggleBrakeModeCmd();
   CommandBase manualArm = new ManualArm(arm, m_codriverController);
   CommandBase stopIntake = intake.stopIntakeCmd();
   CommandBase cubeIntake = new IntakeCube(intake);
@@ -59,7 +59,7 @@ public class RobotContainer {
 
     // DRIVE ADJUSTMENT COMMANDS
     // slow mode is attached to right bumper
-    // m_driverController.a().onTrue(toggleBrakeMode);
+    m_driverController.a().onTrue(toggleBrakeMode);
 
     // MAP GAMEPAD BUTTONS TO COMMANDS
     // these are examples -- feel free to remap

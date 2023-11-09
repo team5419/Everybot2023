@@ -96,12 +96,12 @@ public class Drive extends SubsystemBase {
     rightFollowMotor.setIdleMode(IdleMode.kCoast);
   }
 
-  // public CommandBase toggleBrakeModeCmd() {
-  //   return runOnce(
-  //       () -> {
-  //         if( brakeMode ) { setDriveToCoast(); } else { setDriveToBrake(); }
-  //       });
-  // }
+  public CommandBase toggleBrakeModeCmd() {
+    return runOnce(
+        () -> {
+          if( brakeMode ) { setDriveToCoast(); } else { setDriveToBrake(); }
+        });
+  }
 
   @Override
   public void periodic() {
