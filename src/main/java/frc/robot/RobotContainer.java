@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 // import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.ArmToPosition;
+// import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeCone;
 import frc.robot.commands.IntakeCube;
@@ -31,11 +31,13 @@ public class RobotContainer {
 
   // TODO: Declare and initialize the command(s)
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
+  // CommandBase toggleBrakeMode = drive.toggleBrakeModeCmd();
   CommandBase manualArm = new ManualArm(arm, m_codriverController);
   CommandBase stopIntake = intake.stopIntakeCmd();
   CommandBase cubeIntake = new IntakeCube(intake);
   CommandBase coneIntake = new IntakeCone(intake);
   CommandBase gpOuttake = new OuttakePiece(intake);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,6 +57,10 @@ public class RobotContainer {
     drive.setDefaultCommand(defaultDrive);
     arm.setDefaultCommand(manualArm);
 
+    // DRIVE ADJUSTMENT COMMANDS
+    // slow mode is attached to right bumper
+    // m_driverController.a().onTrue(toggleBrakeMode);
+
     // MAP GAMEPAD BUTTONS TO COMMANDS
     // these are examples -- feel free to remap
 
@@ -64,10 +70,11 @@ public class RobotContainer {
 
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
-    // m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.a().whileTrue(coneIntake);
     m_codriverController.x().whileTrue(cubeIntake);
-    m_codriverController.b().onTrue(stopIntake);
+    m_codriverController.b().whileTrue(gpOuttake);
+    m_codriverController.y().onTrue(stopIntake); // contingency button
+    m_driverController.leftBumper().whileTrue(gpOuttake);
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()

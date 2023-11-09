@@ -42,15 +42,15 @@ public class Intake extends SubsystemBase {
   // Cubes and cones are fed in from different directions so the roller drive direction will be
   // inverted
   public void setConeHoldPower() {
-    intakeMotor.set(0.0);
+    intakeMotor.set(0.2);
   }
 
   public void setConeIntakePower() {
-    intakeMotor.set(0.5);
+    intakeMotor.set(0.7);
   }
 
   public void setConeOuttakePower() {
-    intakeMotor.set(-0.5);
+    intakeMotor.set(-0.7);
   }
 
   public void setCubeHoldPower() {

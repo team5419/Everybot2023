@@ -33,9 +33,9 @@ public class ManualArm extends CommandBase {
   public void execute() {
     // TODO: apply power to arm based on controller left Y
     if( controller.getLeftY() > 0.05) {
-      arm.setArmPower(controller.getLeftY() * 0.15);
+      arm.setArmPower(controller.getLeftY() * 0.23);
     } else {
-      arm.setArmPower(controller.getLeftY() * 0.25);
+      arm.setArmPower(controller.getLeftY() * 0.3);
     }
   }
 
