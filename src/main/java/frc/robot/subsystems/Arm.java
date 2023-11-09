@@ -21,6 +21,18 @@ public class Arm extends SubsystemBase {
   // DECLARE MOTOR (CANSparkMax object)
   private final CANSparkMax m_Arm;
   private final RelativeEncoder m_encoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+
+
+public class Arm extends SubsystemBase {
+
+  // TODO: ADD AND SET CAN ID(s)
+  private final int CAN_ID = 5;
+
+  // TODO: DECLARE MOTOR (CANSparkMax object)
+  private CANSparkMax arm; 
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
@@ -44,6 +56,7 @@ public class Arm extends SubsystemBase {
     m_encoder = m_Arm.getEncoder();
     SmartDashboard.putNumber("Arm Motor Ticks", m_Arm.getEncoder().getPosition());
 
+    /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
     // // set PID coefficients
@@ -53,6 +66,7 @@ public class Arm extends SubsystemBase {
     // m_pidController.setIZone(kIz);
     // m_pidController.setFF(kFF);
     // m_pidController.setOutputRange(kMinOutput, kMaxOutput);
+    
 
     // // display PID coefficients on SmartDashboard
     // SmartDashboard.putNumber("P Gain", kP);
@@ -67,6 +81,10 @@ public class Arm extends SubsystemBase {
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
   }
 
+  public void setArmPower(double power)
+  {
+    arm.set(power);
+  }
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
   // Other classes/commands do not have access to the private motor object so you have to make it accessible
   public void setArmTarget() {}

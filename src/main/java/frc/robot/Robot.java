@@ -19,6 +19,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  public boolean brakeMode = false;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -48,7 +50,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    m_robotContainer.setDriveToBrake();
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -77,6 +81,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_robotContainer.setDriveToCoast();
   }
 
   /** This function is called periodically during operator control. */

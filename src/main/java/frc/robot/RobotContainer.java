@@ -8,9 +8,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.ArmToPosition;
+// import frc.robot.Constants.OperatorConstants;
+// import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeCone;
+import frc.robot.commands.IntakeCube;
+import frc.robot.commands.ManualArm;
+import frc.robot.commands.OuttakePiece;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
@@ -22,15 +26,16 @@ public class RobotContainer {
   private final Drive drive = new Drive();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final CommandXboxController m_codriverController = 
-      new CommandXboxController(OperatorConstants.kCodriverControllerPort);
+  private final CommandXboxController m_driverController = new CommandXboxController(0);
+  private final CommandXboxController m_codriverController = new CommandXboxController(1);
 
   // Declare and initialize the commands
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
-  CommandBase highCone = new ArmToPosition(arm, 0, 0);
-  CommandBase cubeIntake = intake.startCubeIntakeCommand();
+  CommandBase manualArm = new ManualArm(arm, m_codriverController);
+  CommandBase stopIntake = intake.stopIntakeCmd();
+  CommandBase cubeIntake = new IntakeCube(intake);
+  CommandBase coneIntake = new IntakeCone(intake);
+  CommandBase gpOuttake = new OuttakePiece(intake);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -48,13 +53,23 @@ public class RobotContainer {
     // Configure the default command for the drive subsystem
     // Scheduler will use the default command if no other command is using the subsystem
     drive.setDefaultCommand(defaultDrive);
+    arm.setDefaultCommand(manualArm);
 
-    // TODO: MAP GAMEPAD BUTTONS TO COMMANDS
+    // MAP GAMEPAD BUTTONS TO COMMANDS
+    // these are examples -- feel free to remap
+
+    /* TODO: ARM POSITION CONTROL */
+    // use DPAD for positions, may need to use game piece int to adjust target height
+    // m_codriverController.povUp().onTrue(highCone);
+
     // whileTrue -- schedules when pressed, cancels when released
-    m_driverController.povUp().onTrue(highCone);
-    m_driverController.a().whileTrue(cubeIntake);
-    //m_driverController.y().onTrue(zeroGyro);
-    
+    /* TODO: INTAKE - can adjust mapping */
+    // m_codriverController.x().whileTrue(cubeIntake);
+    m_codriverController.a().whileTrue(coneIntake);
+    m_codriverController.x().whileTrue(cubeIntake);
+    m_codriverController.b().onTrue(stopIntake);
+    m_driverController.x().onTrue(gpOuttake);
+
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to
@@ -70,5 +85,11 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
     return Commands.none();
+  }
+  public void setDriveToBrake() {
+      drive.setDriveToBrake();
+  }
+  public void setDriveToCoast() {
+      drive.setDriveToCoast();
   }
 }

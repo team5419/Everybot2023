@@ -28,6 +28,9 @@ public class Intake extends SubsystemBase {
   private double INTAKE_POWER = 0.1;
   private double OUTTAKE_POWER = 0.1;
   private double HOLDING_POWER = 0.1;
+  private int gamePiece = 0; // 0 for cubes, 1 for cones
+
+  // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
 
   public Intake() {
     // Initialize motor controller
@@ -38,71 +41,57 @@ public class Intake extends SubsystemBase {
     m_Intake.setIdleMode(IdleMode.kBrake);
   }
 
-  // This command requires the Intake subsystem
-  public CommandBase setRollerPowerCommand(double power) {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
+  // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
+  // Cubes and cones are fed in from different directions so the roller drive direction will be
+  // inverted
+  public void setHoldConePower() {
+    // intakeMotor.set(0.08) // or something
+  }
 
+  public void setConeIntakePower() {}
+
+  public void setConeOuttakePower() {}
+
+  public void setHoldCubePower() {}
+
+  public void setCubeIntakePower() {}
+
+  public void setCubeOuttakePower() {}
+
+  public void stopIntake() {} // TODO: stop intake (set power to 0)
+
+  // this is only really called by drivers 
+  public CommandBase stopIntakeCmd() {
     return runOnce(
         () -> {
-          // set intake power (reference the constant defined above)
-          //setRollerPowerCommand(INTAKE_POWER);
-          m_Intake.set(power);
+          stopIntake();
         });
   }
 
-  // // SET POWER TO HOLD CONE OR CUBE IN INTAKE
-  public void setHoldConePower() {}
-  public void setHoldCubePower() {}
-
-  public CommandBase startConeIntakeCommand() {
-    m_Intake.set(HOLDING_POWER);
-    // set power based on constant defined above
-    return setRollerPowerCommand(INTAKE_POWER);
-  }
-
-  public CommandBase startConeOuttakeCommand() {
-    // set power based on constant defined above
-    return setRollerPowerCommand(OUTTAKE_POWER);
-  }
-
-  // Cubes and cones are fed in from different directions so the roller drive direction will be inverted
-
-  public CommandBase startCubeIntakeCommand() {
-    // set power based on constant defined above
-    // m_Intake.set(HOLDING_POWER);
-    return setRollerPowerCommand(-(HOLDING_POWER));
-  }
-
-  public CommandBase startCubeOuttakeCommand() {
-    // set power based on constant defined above
-    return setRollerPowerCommand(-(OUTTAKE_POWER));
-  }
-
-  public CommandBase stopIntakeCommand() {
-    return setRollerPowerCommand(-(INTAKE_POWER));
+  public int getGamePieceType() {
+    return gamePiece;
   }
 
   public boolean hasCone() {
     // TODO: determine if intake has a cone because the current is high
-    if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
+        if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
       return true;
     }
     return false;
   }
 
   public boolean hasCube() {
-    // TODO: determine if intake has a cube because the current is high--this might be harder to detect
-    if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
+    // TODO: determine if intake has a cube because the current is high -- this might be harder to
+    // detect
+        if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
       return true;
     }
     return false;
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
-    intake.addNumber("Current", () -> m_Intake.getOutputCurrent());
-  }
+  // @Override
+  // public void periodic() {
+  //   // TODO: update shuffleboard entries
+  // intake.addNumber("Current", () -> m_Intake.getOutputCurrent());
+  // }
 }

@@ -6,23 +6,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Arm;
 
 /** An example command that uses an example subsystem. */
-public class DefaultDrive extends CommandBase {
-  private final Drive drivetrain;
+public class ManualArm extends CommandBase {
+  private final Arm arm;
   private final CommandXboxController controller;
-
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DefaultDrive(Drive drivetrain, CommandXboxController controller) {
-    this.drivetrain = drivetrain;
+  public ManualArm(Arm arm, CommandXboxController controller) {
+    this.arm = arm;
     this.controller = controller;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.drivetrain);
+    addRequirements(this.arm);
   }
 
   // Called when the command is initially scheduled.
@@ -32,16 +31,15 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean slowMode = controller.rightBumper().getAsBoolean();
-    boolean fastTurnMode = controller.leftBumper().getAsBoolean();
-    drivetrain.arcade(controller.getRightX()*0.7, controller.getLeftY()*0.7, slowMode, fastTurnMode);
+    // TODO: apply power to arm based on controller left Y
+    arm.setArmPower(controller.getLeftY());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // modify this for arcade drive
-    drivetrain.arcade(0, 0, false, false);
+    // TODO: stop applying power (set to 0)
+    arm.setArmPower(0);
   }
 
   // Returns true when the command should end.
