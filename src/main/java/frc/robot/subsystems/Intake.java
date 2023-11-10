@@ -35,7 +35,7 @@ public class Intake extends SubsystemBase {
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
   // Cubes and cones are fed in from different directions so the roller drive direction will be
   // inverted
-  public void setHoldConePower() {
+  public void setConeHoldPower() {
     m_Intake.set(0.2);
   }
 
@@ -47,7 +47,7 @@ public class Intake extends SubsystemBase {
     m_Intake.set(-0.5);
   }
 
-  public void setHoldCubePower() {
+  public void setCubeHoldPower() {
     m_Intake.set(0);
   }
 
@@ -75,7 +75,7 @@ public class Intake extends SubsystemBase {
     return gamePiece;
   }
 
-  public setGamePieceType(int setGamePieceInt) {
+  public void setGamePieceType(int setGamePieceInt) {
     gamePiece = setGamePieceInt;
   }
 

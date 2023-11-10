@@ -16,7 +16,8 @@ import frc.robot.commands.ManualArm;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
-
+import frc.robot.commands.IntakeCone;
+import frc.robot.commands.OuttakePiece;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Arm arm = new Arm();
@@ -31,7 +32,9 @@ public class RobotContainer {
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase manualArm = new ManualArm(arm, m_codriverController);
   CommandBase stopIntake = intake.stopIntakeCmd();
-  // CommandBase cubeIntake = new IntakeCube();
+  CommandBase cubeIntake = new IntakeCube(intake);
+  CommandBase coneIntake = new IntakeCone(intake);
+  CommandBase outtakePiece = new OuttakePiece(intake);
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -62,9 +65,11 @@ public class RobotContainer {
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
     // m_codriverController.x().whileTrue(cubeIntake);
-    m_codriverController.b().onTrue(stopIntake);
-
-
+    m_codriverController.b().whileTrue(cubeIntake);
+    m_codriverController.a().whileTrue(coneIntake);
+    m_codriverController.x().whileTrue(outtakePiece);
+    m_codriverController.leftBumper().whileTrue(outtakePiece);
+    m_codriverController.y().onTrue(stopIntake);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to
