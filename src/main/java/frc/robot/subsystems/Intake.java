@@ -81,8 +81,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean hasCube() {
-    // TODO: determine if intake has a cube because the current is high -- this might be harder to
-    // detect
+    // TODO: determine if intake has a cube because the current is high -- this might be harder to detect
         if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
       return true;
     }

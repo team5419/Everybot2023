@@ -19,20 +19,9 @@ public class Arm extends SubsystemBase {
   private final int ArmID = 5;
 
   // DECLARE MOTOR (CANSparkMax object)
-  private final CANSparkMax m_Arm;
-  private final RelativeEncoder m_encoder;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-
-
-public class Arm extends SubsystemBase {
-
-  // TODO: ADD AND SET CAN ID(s)
-  private final int CAN_ID = 5;
-
-  // TODO: DECLARE MOTOR (CANSparkMax object)
   private CANSparkMax arm; 
+
+  private final RelativeEncoder m_encoder;
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
@@ -47,14 +36,14 @@ public class Arm extends SubsystemBase {
 
   public Arm() {
     // Initialize motor controller
-    m_Arm = new CANSparkMax(ArmID, MotorType.kBrushless);
+    arm = new CANSparkMax(ArmID, MotorType.kBrushless);
     // set current limit
-    m_Arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
     // set motor to brake mode
-    m_Arm.setIdleMode(IdleMode.kBrake);
+    arm.setIdleMode(IdleMode.kBrake);
 
-    m_encoder = m_Arm.getEncoder();
-    SmartDashboard.putNumber("Arm Motor Ticks", m_Arm.getEncoder().getPosition());
+    m_encoder = arm.getEncoder();
+    SmartDashboard.putNumber("Arm Motor Ticks", arm.getEncoder().getPosition());
 
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
@@ -97,7 +86,7 @@ public class Arm extends SubsystemBase {
 
   // DETECT IF ARM HAS HIT A HARDSTOP (check motor current)
   public boolean hasHitHardstop() {
-    if (m_Arm.getOutputCurrent() >= 10 /* TODO: placeholder -- replace */) {
+    if (arm.getOutputCurrent() >= 10 /* TODO: placeholder -- replace */) {
       return true;
     }
     return false;
