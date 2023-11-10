@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.SparkMaxPIDController;
 
 public class Arm extends SubsystemBase {
 
@@ -17,6 +18,7 @@ public class Arm extends SubsystemBase {
   private final CANSparkMax ArmMotor;
   //defines encoder
   private RelativeEncoder m_encoder;
+  private SparkMaxPIDController armController;
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
   // set arm targets for low, medium, high, and platform intake.
@@ -26,6 +28,8 @@ public class Arm extends SubsystemBase {
   private final int armHigh;
   private final int armMedium;
 
+  public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
+
 
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
@@ -34,11 +38,27 @@ public class Arm extends SubsystemBase {
   public Arm() {
     ArmMotor = new CANSparkMax(armID,MotorType.kBrushless);
     ArmMotor.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    armController = ArmMotor.getPIDController();
     armTarget = 1;
     armLow = 1;
     armHigh = 1;
     armMedium = 1;
+    
 
+    kP = 0.1;
+    kI = 0;
+    kD = 0;
+    kIz = 0;
+    kFF = 0;
+    kMaxOutput = 0.3;
+    kMinOutput = -0.3;
+
+    armController.setP(kP);
+    armController.setI(kI);
+    armController.setD(kD);
+    armController.setIZone(kIz);
+    armController.setFF(kFF);
+    armController.setOutputRange(kMinOutput, kMaxOutput);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     // m_arm.setIdleMode(IdleMode.kBrake);
 
@@ -80,7 +100,8 @@ public class Arm extends SubsystemBase {
     armTarget = armLow;
   }
   public void SetToPosition(){
-    if (m_encoder.getPosition() > armTarget){
+    ArmMotor.set(m_encoder.getPosition()-armTarget);
+    /*if (m_encoder.getPosition() > armTarget){
       ArmMotor.set(0.5);
     }
     if (m_encoder.getPosition()<armTarget){
@@ -88,7 +109,7 @@ public class Arm extends SubsystemBase {
     }
     if (m_encoder.getPosition() == armTarget){
       ArmMotor.set(0);
-    }
+    }*/
   }
   public void stop(){
     ArmMotor.set(0);
