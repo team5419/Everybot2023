@@ -24,6 +24,7 @@ public class TimeDrive extends CommandBase {
    */
   public TimeDrive(Drive drivetrain, double steer, double fwd, double endTime, boolean jitter) {
     this.drivetrain = drivetrain;
+    timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.drivetrain);
   }

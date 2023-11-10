@@ -13,7 +13,7 @@ public class autoMobility extends SequentialCommandGroup{
         addRequirements(this.drivetrain);
         addCommands(
             new TimeDrive(drivetrain, 0.0, 0.05, 1.0, true),
-            new TimeDrive(drivetrain, 0.0, 0.2, 1.0, false)
+            new TimeDrive(drivetrain, 0.0, -0.05, 1.0, false)
         );
     }
 }
