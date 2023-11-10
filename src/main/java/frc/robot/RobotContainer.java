@@ -52,6 +52,7 @@ public class RobotContainer {
     m_driverController.povUp().onTrue(highCone);
     // whileTrue -- schedules when pressed, cancels when released
     m_driverController.a().whileTrue(cubeIntake);
+    m_driverController.b().onTrue(highCone);
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()

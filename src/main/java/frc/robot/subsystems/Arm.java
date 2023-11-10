@@ -20,7 +20,7 @@ public class Arm extends SubsystemBase {
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
   // set arm targets for low, medium, high, and platform intake.
-  private final int armTarget;
+  private int armTarget;
 
   private final int armLow;
   private final int armHigh;
@@ -68,7 +68,38 @@ public class Arm extends SubsystemBase {
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
   // Other classes/commands do not have access to the private motor object so you have to make it
   // accessible
-  public void setArmTarget(int target) {
+  public void TargetHigh(){
+    armTarget = armHigh;
+  }
+
+  public void TargetMedium(){
+    armTarget = armMedium;
+  }
+
+  public void TargetLow(){
+    armTarget = armLow;
+  }
+  public void SetToPosition(){
+    if (m_encoder.getPosition() > armTarget){
+      ArmMotor.set(0.5);
+    }
+    if (m_encoder.getPosition()<armTarget){
+      ArmMotor.set(-0.5);
+    }
+    if (m_encoder.getPosition() == armTarget){
+      ArmMotor.set(0);
+    }
+  }
+  public void stop(){
+    ArmMotor.set(0);
+  }
+  public boolean isAtPosition(){
+    return m_encoder.getPosition() == armTarget;
+  }
+  public void manual(double amount){//for manual movement
+    ArmMotor.set(amount);
+  }
+  /*public void setArmTarget(int target) {
     //armTarget = target;
   }
 
@@ -84,7 +115,7 @@ public class Arm extends SubsystemBase {
   public boolean hasHitHardstop() {
     return false; // TODO: placeholder -- replace
   }
-
+  */
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
