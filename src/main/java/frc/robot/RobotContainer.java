@@ -66,9 +66,9 @@ public class RobotContainer {
     /* TODO: INTAKE - can adjust mapping */
     // m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.b().whileTrue(cubeIntake);
-    m_codriverController.a().whileTrue(coneIntake);
-    m_driverController.x().whileTrue(outtakePiece);
-    m_codriverController.leftBumper().whileTrue(outtakePiece);
+    // m_codriverController.a().whileTrue(coneIntake);
+    // m_driverController.x().whileTrue(outtakePiece);
+    // m_codriverController.leftBumper().whileTrue(outtakePiece);
     m_codriverController.y().onTrue(stopIntake);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
