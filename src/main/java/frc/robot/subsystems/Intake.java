@@ -59,6 +59,7 @@ public class Intake extends SubsystemBase {
     m_Intake.set(0.7);
   }
 
+
   public void stopIntake() {
     m_Intake.set(0);
   } // TODO: stop intake (set power to 0)
