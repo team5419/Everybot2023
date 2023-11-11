@@ -7,6 +7,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.SparkMaxPIDController;
 
@@ -37,6 +38,7 @@ public class Arm extends SubsystemBase {
 
   public Arm() {
     ArmMotor = new CANSparkMax(armID,MotorType.kBrushless);
+    m_encoder = ArmMotor.getEncoder();
     ArmMotor.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
     armController = ArmMotor.getPIDController();
     armTarget = 1;
@@ -45,7 +47,7 @@ public class Arm extends SubsystemBase {
     armMedium = 1;
     
 
-    kP = 0.1;
+    kP = 0.05;
     kI = 0;
     kD = 0;
     kIz = 0;
@@ -100,7 +102,7 @@ public class Arm extends SubsystemBase {
     armTarget = armLow;
   }
   public void SetToPosition(){
-    ArmMotor.set(m_encoder.getPosition()-armTarget);
+    //ArmMotor.set(m_encoder.getPosition()-armTarget);
     /*if (m_encoder.getPosition() > armTarget){
       ArmMotor.set(0.5);
     }
@@ -119,6 +121,9 @@ public class Arm extends SubsystemBase {
   }
   public void manual(double amount){//for manual movement
     ArmMotor.set(amount);
+  }
+  public void zero(){//zero the arm encoder
+    m_encoder.setPosition(0);
   }
   /*public void setArmTarget(int target) {
     //armTarget = target;
@@ -139,8 +144,6 @@ public class Arm extends SubsystemBase {
   */
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-
-    // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
+    SmartDashboard.putNumber("encoder position", m_encoder.getPosition());
   }
 }
