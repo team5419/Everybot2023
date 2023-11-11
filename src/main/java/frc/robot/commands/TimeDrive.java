@@ -15,15 +15,17 @@ public class TimeDrive extends CommandBase {
   private double fwd;
   private Timer timer;
   private double endTime;
-  private boolean jitter;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TimeDrive(Drive drivetrain, double steer, double fwd, double endTime, boolean jitter) {
+  public TimeDrive(Drive drivetrain, double steer, double fwd, double endTime) {
     this.drivetrain = drivetrain;
+    this.steer = steer;
+    this.fwd = fwd;
+    this.endTime = endTime;
     timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.drivetrain);
@@ -39,12 +41,7 @@ public class TimeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (jitter) {
-      drivetrain.arcade(steer, fwd, false, false);
-      drivetrain.arcade(steer, -fwd, false, false);
-    } else {
-      drivetrain.arcade(steer, fwd, false, false);
-    }
+    drivetrain.arcade(steer, fwd, false, false);
  }
 
   // Called once the command ends or is interrupted.

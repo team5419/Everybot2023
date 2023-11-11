@@ -67,16 +67,11 @@ public class Drive extends SubsystemBase {
   // add arcade drive accessor; add a speed multiplier for slow mode
   public void arcade(double steer, double fwd, boolean slowMode, boolean fastMode) {
     drivetrain.arcadeDrive(steer, fwd, slowMode);
-    if (slowMode == true) {
+    if (slowMode) {
       drivetrain.arcadeDrive(steer/2, fwd/2);
-    } else {
-      drivetrain.arcadeDrive(steer, fwd);
-    }
-    if (fastMode == true) {
+    } else if (fastMode) {
       drivetrain.arcadeDrive(steer*2, fwd);
-    } else {
-      drivetrain.arcadeDrive(steer, fwd);
-    }
+    } 
     // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
   }
 
