@@ -19,6 +19,7 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeCone;
 import frc.robot.commands.OuttakePiece;
+import frc.robot.autos.AutoJitter;
 import frc.robot.autos.AutoMobility;
 import frc.robot.autos.AutoScoreAndMobility;
 
@@ -92,7 +93,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return new AutoMobility(drive);
+    return new AutoJitter(drive);
   }
 
   public void setDriveToBrake() {
