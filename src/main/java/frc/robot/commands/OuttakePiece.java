@@ -4,48 +4,57 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Intake;
 
 /** An example command that uses an example subsystem. */
-public class DefaultDrive extends CommandBase {
-  private final Drive drivetrain;
-  private final CommandXboxController controller;
-
+public class OuttakePiece extends CommandBase {
+  private final Intake intake;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DefaultDrive(Drive drivetrain, CommandXboxController controller) {
-    this.drivetrain = drivetrain;
-    this.controller = controller;
+  public OuttakePiece(Intake intake) {
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.drivetrain);
+    addRequirements(this.intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // TODO: apply scoring power
+    if(intake.getGamePieceType() == 0){
+      intake.setCubeOuttakePower();
+    }
+    else {
+      intake.setConeOuttakePower();
+    }
+    // TODO: apply power in + or - direction depending on intake.gamePiece int (0 cube, 1 cone)
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean slowMode = controller.rightBumper().getAsBoolean();
-    drivetrain.arcade(controller.getRightX()*0.7, controller.getLeftY()*0.7, slowMode);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // modify this for arcade drive
-    drivetrain.arcade(0, 0, false);
+    // TODO: reduce to a low holding power
+    if(intake.getGamePieceType() == 0){
+      intake.setCubeHoldPower();
+    }
+    else {
+      intake.setConeHoldPower();
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // TODO (low priority): use motor current to determine when game piece is secure
     return false;
   }
 }

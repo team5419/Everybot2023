@@ -5,24 +5,28 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
   // Define member variables
-  // TODO: SET CAN ID(s)
+  // SET CAN ID(s)
   private final int leftLeadID = 12;
   private final int leftFollowID = 13;
-  private final int rightLeadMotorID = 22;
+  private final int rightLeadID = 22;
   private final int rightFollowID= 23;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
-
-  // TODO: add the right follower for the same for the right side
   private final CANSparkMax rightLeadMotor;
   private final CANSparkMax rightFollowMotor;
+
+  // TODO: find actual values
+  public int stallLimit = 60;
+  public int freeLimit = 60;
+  public double rampTime = 0.5;
 
   DifferentialDrive drivetrain;
 
@@ -39,26 +43,49 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
-    rightLeadMotor = new CANSparkMax(rightLeadMotorID,MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadID,MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
+
+    leftLeadMotor.setSmartCurrentLimit(stallLimit, freeLimit);
+    leftLeadMotor.setOpenLoopRampRate(rampTime);
+    rightLeadMotor.setSmartCurrentLimit(stallLimit, freeLimit);
+    rightLeadMotor.setOpenLoopRampRate(rampTime);
 
     // link the control of the two motors together, since they drive one common gearbox
     leftFollowMotor.follow(leftLeadMotor);
     rightFollowMotor.follow(rightLeadMotor);
 
-
+    // set motor inversion as necessary here! (left side)
+    leftFollowMotor.setInverted(true);
 
     // class that contains all the wpilib control methods
     drivetrain = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
   }
 
-  public void tank(double left, double right) {
-    drivetrain.tankDrive(left, right);
+  // add arcade drive accessor; add a speed multiplier for slow mode
+  public void arcade(double steer, double fwd, boolean slowMode) {
+    drivetrain.arcadeDrive(steer, fwd, slowMode);
+    if (slowMode == true) {
+      drivetrain.arcadeDrive(steer/2, fwd/2);
+    } else {
+      drivetrain.arcadeDrive(steer * 0.7, fwd);
+    }
+    // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
   }
 
-  // TODO: other differential drive modes that can be considered later
-  // public void arcade() {}
-  // public void curvature() {}
+  public void setDriveToBrake() {
+    leftLeadMotor.setIdleMode(IdleMode.kBrake);
+    leftFollowMotor.setIdleMode(IdleMode.kBrake);
+    rightLeadMotor.setIdleMode(IdleMode.kBrake);
+    rightFollowMotor.setIdleMode(IdleMode.kBrake);
+  }
+
+  public void setDriveToCoast() {
+    leftLeadMotor.setIdleMode(IdleMode.kCoast);
+    leftFollowMotor.setIdleMode(IdleMode.kCoast);
+    rightLeadMotor.setIdleMode(IdleMode.kCoast);
+    rightFollowMotor.setIdleMode(IdleMode.kCoast);
+  }
 
   @Override
   public void periodic() {
