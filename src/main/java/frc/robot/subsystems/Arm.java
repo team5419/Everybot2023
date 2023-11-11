@@ -43,6 +43,8 @@ public class Arm extends SubsystemBase {
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     arm.setIdleMode(IdleMode.kBrake);
 
+    arm.setInverted(true);
+
     armEncoder = arm.getEncoder();
     arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
     armController = arm.getPIDController();
@@ -65,6 +67,8 @@ public class Arm extends SubsystemBase {
     armController.setIZone(kIz);
     armController.setFF(kFF);
     armController.setOutputRange(kMinOutput, kMaxOutput);
+
+
 
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES

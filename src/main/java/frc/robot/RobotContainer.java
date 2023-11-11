@@ -19,6 +19,8 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeCone;
 import frc.robot.commands.OuttakePiece;
+import frc.robot.autos.AutoMobility;
+
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Arm arm = new Arm();
@@ -67,9 +69,9 @@ public class RobotContainer {
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
     // m_codriverController.x().whileTrue(cubeIntake);
-    m_codriverController.b().whileTrue(cubeIntake);
+    m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.a().whileTrue(coneIntake);
-    m_codriverController.x().whileTrue(outtakePiece);
+    m_codriverController.b().whileTrue(outtakePiece);
     m_driverController.leftBumper().whileTrue(outtakePiece);
     m_codriverController.y().onTrue(stopIntake);
     m_codriverController.rightBumper().onTrue(zeroArm);
@@ -87,6 +89,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return Commands.none();
+    return new AutoMobility(drive);
+  }
+
+  public void setDriveToBrake() {
+    drive.setDriveToBrake();
+  }
+
+  public void setDriveToCoast() {
+    drive.setDriveToCoast();
   }
 }
