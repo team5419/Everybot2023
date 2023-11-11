@@ -30,6 +30,8 @@ public class Intake extends SubsystemBase {
       m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
       m_Intake.setIdleMode(IdleMode.kBrake);
+
+      m_Intake.setInverted(true);
   }
 
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE

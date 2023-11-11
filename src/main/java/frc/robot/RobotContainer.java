@@ -67,9 +67,9 @@ public class RobotContainer {
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
     // m_codriverController.x().whileTrue(cubeIntake);
-    m_codriverController.b().whileTrue(cubeIntake);
+    m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.a().whileTrue(coneIntake);
-    m_codriverController.x().whileTrue(outtakePiece);
+    m_codriverController.b().whileTrue(outtakePiece);
     m_driverController.leftBumper().whileTrue(outtakePiece);
     m_codriverController.y().onTrue(stopIntake);
     // Gets the boolean value of a button

@@ -37,6 +37,8 @@ public class Arm extends SubsystemBase {
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     arm.setIdleMode(IdleMode.kBrake);
 
+    arm.setInverted(true);
+
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
     // example syntax
