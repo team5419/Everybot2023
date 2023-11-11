@@ -19,6 +19,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeCone;
 import frc.robot.commands.OuttakePiece;
 import frc.robot.autos.AutoMobility;
+import frc.robot.autos.AutoScoreAndMobility;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -37,6 +38,7 @@ public class RobotContainer {
   CommandBase cubeIntake = new IntakeCube(intake);
   CommandBase coneIntake = new IntakeCone(intake);
   CommandBase outtakePiece = new OuttakePiece(intake);
+  CommandBase brakeModeCmd = drive.brakeModeCmd();
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -72,6 +74,7 @@ public class RobotContainer {
     m_codriverController.b().whileTrue(outtakePiece);
     m_driverController.leftBumper().whileTrue(outtakePiece);
     m_codriverController.y().onTrue(stopIntake);
+    m_driverController.a().onTrue(brakeModeCmd);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to
@@ -86,7 +89,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return new AutoMobility(drive);
+    return new AutoScoreAndMobility(drive, intake, arm);
   }
 
   public void setDriveToBrake() {

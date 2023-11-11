@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
@@ -85,6 +86,13 @@ public class Drive extends SubsystemBase {
     leftFollowMotor.setIdleMode(IdleMode.kCoast);
     rightLeadMotor.setIdleMode(IdleMode.kCoast);
     rightFollowMotor.setIdleMode(IdleMode.kCoast);
+  }
+
+  public CommandBase brakeModeCmd() {
+    return runOnce(
+        () -> {
+          setDriveToBrake();
+        });
   }
 
   @Override
