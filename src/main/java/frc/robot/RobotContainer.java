@@ -73,7 +73,7 @@ public class RobotContainer {
     m_codriverController.a().whileTrue(coneIntake);
     m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.b().onTrue(stopIntake);
-    m_driverController.x().onTrue(gpOuttake);
+    m_driverController.x().onTrue(outtakePiece);
 
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
