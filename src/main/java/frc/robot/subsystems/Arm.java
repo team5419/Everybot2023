@@ -26,11 +26,11 @@ public class Arm extends SubsystemBase {
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
-  private int armTarget;
-  private final int armLow;
-  private final int armHigh;
-  private final int armMedium;
-
+  private double armTarget;
+  public final double armLow = 1;
+  public final double armHigh = -37;
+  public final double armMedium = -20;
+  public int lastPos = 0;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
   public Arm() {
@@ -49,9 +49,6 @@ public class Arm extends SubsystemBase {
     arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
     armController = arm.getPIDController();
     armTarget = 1;
-    armLow = 1;
-    armHigh = 1;
-    armMedium = 1;
 
     kP = 0.05;
     kI = 0;
@@ -94,7 +91,7 @@ public class Arm extends SubsystemBase {
 
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
   }
-  public void TargetHigh(){
+  /*public void TargetHigh(){
     armTarget = armHigh;
   }
 
@@ -104,29 +101,22 @@ public class Arm extends SubsystemBase {
 
   public void TargetLow(){
     armTarget = armLow;
-  }
+  }*/
 
   public void setArmPower(double power)
   {
     arm.set(power);
   }
-  public void SetToPosition(){
-    //ArmMotor.set(m_encoder.getPosition()-armTarget);
-    /*if (m_encoder.getPosition() > armTarget){
-      ArmMotor.set(0.5);
-    }
-    if (m_encoder.getPosition()<armTarget){
-      ArmMotor.set(-0.5);
-    }
-    if (m_encoder.getPosition() == armTarget){
-      ArmMotor.set(0);
-    }*/
+  public void SetToPosition(double target){
+    armController.setReference(target, CANSparkMax.ControlType.kPosition);
+    armTarget = target;
   }
   public void stop(){
     arm.set(0);
   }
-  public boolean isAtPosition(){
-    return armEncoder.getPosition() == armTarget;
+  public boolean isAtPosition(double tolerance){
+    //return armEncoder.getPosition() > armTarget + tolerance && armEncoder.getPosition() < armTarget  tolerance;
+    return Math.abs(armTarget - armEncoder.getPosition())<tolerance;
   }
   public void zero(){//zero the arm encoder
     armEncoder.setPosition(0);

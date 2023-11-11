@@ -5,10 +5,10 @@ import frc.robot.subsystems.Arm;
 
 public class ArmToPosition extends CommandBase {
   private final Arm arm;
-  private final int target;
-  private final int tolerance;
+  private final double target;
+  private final double tolerance;
 
-  public ArmToPosition(Arm arm, int target, int tolerance) {
+  public ArmToPosition(Arm arm, double target, double tolerance) {
     this.arm = arm;
     this.target = target;
     this.tolerance = tolerance;
@@ -20,21 +20,13 @@ public class ArmToPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (target == 0){
-      arm.TargetHigh();
-    }
-    if (target == 1){
-      arm.TargetMedium();
-    }
-    if (target == 2){
-      arm.TargetHigh();
-    }
+    arm.SetToPosition(target);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    arm.SetToPosition();
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -46,6 +38,7 @@ public class ArmToPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return arm.isAtPosition();
+    // return arm.isAtPosition(tolerance);
+    return false;
   }
 }
