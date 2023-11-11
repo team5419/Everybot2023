@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.autos.AutoMobility;
 // import frc.robot.Constants.OperatorConstants;
@@ -40,6 +41,7 @@ public class RobotContainer {
   CommandBase cubeIntake = new IntakeCube(intake);
   CommandBase coneIntake = new IntakeCone(intake);
   CommandBase outtakePiece = new OuttakePiece(intake);
+  CommandBase zeroArm = new InstantCommand(() -> arm.zero());
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -75,6 +77,7 @@ public class RobotContainer {
     m_codriverController.x().whileTrue(outtakePiece);
     m_driverController.leftBumper().whileTrue(outtakePiece);
     m_codriverController.y().onTrue(stopIntake);
+    m_codriverController.rightBumper().onTrue(zeroArm);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to

@@ -40,13 +40,14 @@ public class ManualArm extends CommandBase {
       arm.setArmPower(controller.getLeftY() * 0.5);
 
     }
+    //arm.setArmPower(controller.getLeftY());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     // TODO: stop applying power (set to 0)
-    arm.setArmPower(0);
+    //arm.setArmPower(0);
   }
 
   // Returns true when the command should end.
