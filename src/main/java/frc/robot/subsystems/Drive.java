@@ -68,7 +68,7 @@ public class Drive extends SubsystemBase {
     if (slowMode == true) {
       drivetrain.arcadeDrive(steer/2, fwd/2);
     } else {
-      drivetrain.arcadeDrive(steer, fwd);
+      drivetrain.arcadeDrive(steer * 0.7, fwd);
     }
     // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
   }
