@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.SubsystemBase; 
 
 public class Drive extends SubsystemBase {
   // Define member variables
@@ -16,14 +16,15 @@ public class Drive extends SubsystemBase {
   private final int leftLeadID = 12;
   private final int leftFollowID = 13;
   private final int rightLeadID = 22;
-  private final int rightFollowID= 23;
+  private final int rightFollowID = 23;
 
   private final CANSparkMax leftLeadMotor;
   private final CANSparkMax leftFollowMotor;
+
   private final CANSparkMax rightLeadMotor;
   private final CANSparkMax rightFollowMotor;
 
-  // TODO: find actual values
+  //TODO: find actual values for these
   public int stallLimit = 60;
   public int freeLimit = 60;
   public double rampTime = 0.5;
@@ -43,9 +44,10 @@ public class Drive extends SubsystemBase {
     // Initialize or "create" the 2 motor controllers + motors
     leftLeadMotor = new CANSparkMax(leftLeadID, MotorType.kBrushless);
     leftFollowMotor = new CANSparkMax(leftFollowID, MotorType.kBrushless);
-    rightLeadMotor = new CANSparkMax(rightLeadID,MotorType.kBrushless);
+    rightLeadMotor = new CANSparkMax(rightLeadID, MotorType.kBrushless);
     rightFollowMotor = new CANSparkMax(rightFollowID, MotorType.kBrushless);
 
+    // setting current limits for the motors
     leftLeadMotor.setSmartCurrentLimit(stallLimit, freeLimit);
     leftLeadMotor.setOpenLoopRampRate(rampTime);
     rightLeadMotor.setSmartCurrentLimit(stallLimit, freeLimit);
@@ -63,13 +65,13 @@ public class Drive extends SubsystemBase {
   }
 
   // add arcade drive accessor; add a speed multiplier for slow mode
-  public void arcade(double steer, double fwd, boolean slowMode) {
+  public void arcade(double steer, double fwd, boolean slowMode, boolean fastMode) {
     drivetrain.arcadeDrive(steer, fwd, slowMode);
-    if (slowMode == true) {
+    if (slowMode) {
       drivetrain.arcadeDrive(steer/2, fwd/2);
-    } else {
-      drivetrain.arcadeDrive(steer * 0.7, fwd);
-    }
+    } else if (fastMode) {
+      drivetrain.arcadeDrive(steer*2, fwd);
+    } 
     // take a look here for syntax: https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html
   }
 

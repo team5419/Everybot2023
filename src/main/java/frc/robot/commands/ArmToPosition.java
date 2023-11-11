@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 
 public class ArmToPosition extends CommandBase {
-  private final Arm arm;
-  private final int target;
-  private final int tolerance;
+  // private final Arm arm;
+  // private final int target;
+  // private final int tolerance;
 
   public ArmToPosition(Arm arm, int target, int tolerance) {
-    this.arm = arm;
-    this.target = target;
-    this.tolerance = tolerance;
+    // this.arm = arm;
+    // this.target = target;
+    // this.tolerance = tolerance;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(arm);
@@ -21,6 +21,7 @@ public class ArmToPosition extends CommandBase {
   @Override
   public void initialize() {
     // TODO: SET GOAL POSITION ON MOTOR
+    // target = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +35,9 @@ public class ArmToPosition extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // TODO: IF NOT INTERRUPTED -- STOP ARM
+    if (interrupted == false) {
+      
+    }
     // BONUS: SHOW THAT WE'VE REACHED THE END WITH A COLOR INDICATOR ON SHUFFLEBOARD
   }
 
@@ -41,6 +45,9 @@ public class ArmToPosition extends CommandBase {
   @Override
   public boolean isFinished() {
     // TODO: IS FINISHED WHEN THE MOTOR TICKS IS WITHIN RANGE OF THE TARGET
+    // if () {
+    //   return true;
+    // }
     return false;
   }
 }

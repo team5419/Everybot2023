@@ -8,14 +8,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.autos.AutoMobility;
 // import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.ArmToPosition;
+// import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeCone;
 import frc.robot.commands.IntakeCube;
 import frc.robot.commands.ManualArm;
+import frc.robot.commands.OuttakePiece;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
+// import frc.robot.autos.autoMobility;
+
 import frc.robot.commands.IntakeCone;
 import frc.robot.commands.OuttakePiece;
 public class RobotContainer {
@@ -28,7 +33,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController = new CommandXboxController(0);
   private final CommandXboxController m_codriverController = new CommandXboxController(1);
 
-  // TODO: Declare and initialize the command(s)
+  // Declare and initialize the commands
   CommandBase defaultDrive = new DefaultDrive(drive, m_driverController);
   CommandBase manualArm = new ManualArm(arm, m_codriverController);
   CommandBase stopIntake = intake.stopIntakeCmd();
@@ -84,6 +89,12 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return Commands.none();
+    return new AutoMobility(drive);
+  }
+  public void setDriveToBrake() {
+      drive.setDriveToBrake();
+  }
+  public void setDriveToCoast() {
+      drive.setDriveToCoast();
   }
 }

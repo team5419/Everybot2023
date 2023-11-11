@@ -4,49 +4,55 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
+import edu.wpi.first.wpilibj.Timer;
 
 /** An example command that uses an example subsystem. */
-public class DefaultDrive extends CommandBase {
+public class TimeDrive extends CommandBase {
   private final Drive drivetrain;
-  private final CommandXboxController controller;
+  private double steer;
+  private double fwd;
+  private Timer timer;
+  private double endTime;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DefaultDrive(Drive drivetrain, CommandXboxController controller) {
+  public TimeDrive(Drive drivetrain, double steer, double fwd, double endTime) {
     this.drivetrain = drivetrain;
-    this.controller = controller;
+    this.steer = steer;
+    this.fwd = fwd;
+    this.endTime = endTime;
+    timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.reset();
+    timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean slowMode = controller.rightBumper().getAsBoolean();
-    boolean fastTurnMode = controller.leftBumper().getAsBoolean();
-    drivetrain.arcade(controller.getRightX()*0.7, controller.getLeftY()*0.7, slowMode, fastTurnMode);
-  }
+    drivetrain.arcade(steer, fwd, false, false);
+ }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // modify this for arcade drive
     drivetrain.arcade(0, 0, false, false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.get() > endTime;
   }
 }

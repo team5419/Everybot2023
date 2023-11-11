@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class Intake extends SubsystemBase {
   // TODO: SET CAN ID
@@ -18,6 +20,14 @@ public class Intake extends SubsystemBase {
   // set motor current limit
   private static final int INTAKE_CURRENT_LIMIT = 35;
 
+  // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
+  ShuffleboardTab intake = Shuffleboard.getTab("Current wheel power");
+  // intake.addNumber("Current wheel power", () -> m_Intake.getWheelPower());
+
+  // DEFINE INTAKE/OUTTAKE/HOLDING POWERS
+  private double INTAKE_POWER = 0.1;
+  private double OUTTAKE_POWER = 0.1;
+  private double HOLDING_POWER = 0.1;
   private int gamePiece = 0; // 0 for cubes, 1 for cones
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR CURRENT WHEEL POWER
@@ -59,7 +69,6 @@ public class Intake extends SubsystemBase {
     m_Intake.set(0.7);
   }
 
-
   public void stopIntake() {
     m_Intake.set(0);
   } // TODO: stop intake (set power to 0)
@@ -81,17 +90,23 @@ public class Intake extends SubsystemBase {
 
   public boolean hasCone() {
     // TODO: determine if intake has a cone because the current is high
+        if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
+      return true;
+    }
     return false;
   }
 
   public boolean hasCube() {
-    // TODO: determine if intake has a cube because the current is high -- this might be harder to
-    // detect
+    // TODO: determine if intake has a cube because the current is high -- this might be harder to detect
+        if (m_Intake.getOutputCurrent() >= 10.0 /* dummy value */) {
+      return true;
+    }
     return false;
   }
 
   // @Override
   // public void periodic() {
   //   // TODO: update shuffleboard entries
+  // intake.addNumber("Current", () -> m_Intake.getOutputCurrent());
   // }
 }
