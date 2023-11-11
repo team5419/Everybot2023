@@ -42,6 +42,11 @@ public class RobotContainer {
   CommandBase outtakePiece = new OuttakePiece(intake);
   CommandBase brakeModeCmd = drive.brakeModeCmd();
   CommandBase zeroArm = new InstantCommand(() -> arm.zero());
+  CommandBase armHigh = new ArmToPosition(arm,arm.armHigh,1.5);
+  CommandBase armLow = new ArmToPosition(arm,arm.armLow,1.5);
+  CommandBase armMedium = new ArmToPosition(arm, arm.armMedium, 1.5);
+
+  
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -79,6 +84,9 @@ public class RobotContainer {
     m_codriverController.y().onTrue(stopIntake);
     m_driverController.a().onTrue(brakeModeCmd);
     m_codriverController.rightBumper().onTrue(zeroArm);
+    m_codriverController.povRight().whileTrue(armMedium);
+    m_codriverController.povUp().whileTrue(armHigh);
+    m_codriverController.povDown().whileTrue(armLow);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to
