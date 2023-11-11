@@ -21,6 +21,8 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 // import frc.robot.autos.autoMobility;
 
+import frc.robot.commands.IntakeCone;
+import frc.robot.commands.OuttakePiece;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Arm arm = new Arm();
@@ -37,7 +39,8 @@ public class RobotContainer {
   CommandBase stopIntake = intake.stopIntakeCmd();
   CommandBase cubeIntake = new IntakeCube(intake);
   CommandBase coneIntake = new IntakeCone(intake);
-  CommandBase gpOuttake = new OuttakePiece(intake);
+  CommandBase outtakePiece = new OuttakePiece(intake);
+  // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
