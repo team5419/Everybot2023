@@ -14,7 +14,8 @@ public class AutoMobility extends SequentialCommandGroup{
             new TimeDrive(drivetrain, 0.0, -0.2, 0.3),
             new TimeDrive(drivetrain, 0.0, 0.2, 0.2),
             new TimeDrive(drivetrain, 0.0, -0.2, 0.3),
-            new TimeDrive(drivetrain, 0.0, 0.4, 1.0)
+            new TimeDrive(drivetrain, 0.0, -0.1, 0.5),
+            new TimeDrive(drivetrain, 0.0, 0.4, 1.7)
         );
     }
 }
