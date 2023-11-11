@@ -4,46 +4,38 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.RelativeEncoder;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class Arm extends SubsystemBase {
 
-  // ADD AND SET CAN ID(s)
-  private final int ArmID = 5;
+  // TODO: ADD AND SET CAN ID(s)
+  private final int CAN_ID = 5;
 
-  // DECLARE MOTOR (CANSparkMax object)
+  // TODO: DECLARE MOTOR (CANSparkMax object)
   private CANSparkMax arm; 
-
-  private final RelativeEncoder m_encoder;
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
 
   // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
-  // test robot to count ticks
-  // private final int lowPosition = 0;
-  // private final int midPosition = 0;
-  // private final int highPosition = 0;
+  
 
   // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
+  // public static final
 
   public Arm() {
-    // Initialize motor controller
-    arm = new CANSparkMax(ArmID, MotorType.kBrushless);
-    // set current limit
-    arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
-    // set motor to brake mode
-    arm.setIdleMode(IdleMode.kBrake);
+    // TODO: Initialize motor controller
+    arm = new CANSparkMax(CAN_ID, MotorType.kBrushless);
 
-    m_encoder = arm.getEncoder();
-    SmartDashboard.putNumber("Arm Motor Ticks", arm.getEncoder().getPosition());
+    // TODO: set current limit
+    arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+
+    // TODO: set motor in brake mode so that the motor holds position even when not given a command
+    arm.setIdleMode(IdleMode.kBrake);
 
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
@@ -75,7 +67,8 @@ public class Arm extends SubsystemBase {
     arm.set(power);
   }
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
-  // Other classes/commands do not have access to the private motor object so you have to make it accessible
+  // Other classes/commands do not have access to the private motor object so you have to make it
+  // accessible
   public void setArmTarget() {}
 
   public void getArmPosition() {}
@@ -84,17 +77,15 @@ public class Arm extends SubsystemBase {
 
   public void zeroArmEncoder() {}
 
-  // DETECT IF ARM HAS HIT A HARDSTOP (check motor current)
+  // TODO: DETECT IF ARM HAS HIT A HARDSTOP (check motor current)
   public boolean hasHitHardstop() {
-    if (arm.getOutputCurrent() >= 10 /* TODO: placeholder -- replace */) {
-      return true;
-    }
-    return false;
+    return false; // TODO: placeholder -- replace
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
     // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
   }
 }
