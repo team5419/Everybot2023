@@ -3,10 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 
@@ -17,15 +21,17 @@ public class Arm extends SubsystemBase {
 
   // TODO: DECLARE MOTOR (CANSparkMax object)
   private CANSparkMax arm; 
+  private RelativeEncoder armEncoder;
+  private SparkMaxPIDController armController;
 
   // set motor current limits
   private final int ARM_CURRENT_LIMIT = 20;
+  private int armTarget;
+  private final int armLow;
+  private final int armHigh;
+  private final int armMedium;
 
-  // TODO: DEFINE ARM POSITIONS FOR LOW, MEDIUM, HIGH, AND PLATFORM INTAKE
-  
-
-  // TODO: DECLARE SHUFFLEBOARD ENTRIES FOR ARM MOTOR TICKS AND ARM PID
-  // public static final
+  public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
   public Arm() {
     // TODO: Initialize motor controller
@@ -36,6 +42,29 @@ public class Arm extends SubsystemBase {
 
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
     arm.setIdleMode(IdleMode.kBrake);
+
+    armEncoder = arm.getEncoder();
+    arm.setSmartCurrentLimit(ARM_CURRENT_LIMIT);
+    armController = arm.getPIDController();
+    armTarget = 1;
+    armLow = 1;
+    armHigh = 1;
+    armMedium = 1;
+
+    kP = 0.05;
+    kI = 0;
+    kD = 0;
+    kIz = 0;
+    kFF = 0;
+    kMaxOutput = 0.3;
+    kMinOutput = -0.3;
+
+    armController.setP(kP);
+    armController.setI(kI);
+    armController.setD(kD);
+    armController.setIZone(kIz);
+    armController.setFF(kFF);
+    armController.setOutputRange(kMinOutput, kMaxOutput);
 
     /* TODO; ARM POSITION CONTROL TASK */
     // TODO: SET MOTOR CONTROLLER PID VALUES
@@ -61,22 +90,54 @@ public class Arm extends SubsystemBase {
 
     // TODO: INITIALIZE SHUFFLEBOARD ENTRIES
   }
+  public void TargetHigh(){
+    armTarget = armHigh;
+  }
+
+  public void TargetMedium(){
+    armTarget = armMedium;
+  }
+
+  public void TargetLow(){
+    armTarget = armLow;
+  }
 
   public void setArmPower(double power)
   {
     arm.set(power);
   }
+  public void SetToPosition(){
+    //ArmMotor.set(m_encoder.getPosition()-armTarget);
+    /*if (m_encoder.getPosition() > armTarget){
+      ArmMotor.set(0.5);
+    }
+    if (m_encoder.getPosition()<armTarget){
+      ArmMotor.set(-0.5);
+    }
+    if (m_encoder.getPosition() == armTarget){
+      ArmMotor.set(0);
+    }*/
+  }
+  public void stop(){
+    arm.set(0);
+  }
+  public boolean isAtPosition(){
+    return armEncoder.getPosition() == armTarget;
+  }
+  public void zero(){//zero the arm encoder
+    armEncoder.setPosition(0);
+  }
   // TODO: ADD MOTOR ACCESSORS FOR SETTING TARGET POSITION
   // Other classes/commands do not have access to the private motor object so you have to make it
   // accessible
-  public void setArmTarget() {}
+ /*  public void setArmTarget() {}
 
   public void getArmPosition() {}
   // TODO: ADD MOTOR ACCESSORS FOR ZEROING MOTOR POWER AND MOTOR ENCODER
   public void stopArmInput() {}
 
   public void zeroArmEncoder() {}
-
+  */
   // TODO: DETECT IF ARM HAS HIT A HARDSTOP (check motor current)
   public boolean hasHitHardstop() {
     return false; // TODO: placeholder -- replace
@@ -84,8 +145,6 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-
-    // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
+    SmartDashboard.putNumber("encoder position", armEncoder.getPosition());
   }
 }
