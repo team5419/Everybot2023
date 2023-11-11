@@ -4,12 +4,15 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 /** An example command that uses an example subsystem. */
 public class IntakeCone extends CommandBase {
   private final Intake intake;
+  private Timer timer;
+  private double lengthOfIntake;
   /**
    * Creates a new ExampleCommand.
    *
