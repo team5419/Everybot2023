@@ -96,7 +96,7 @@ public class Arm extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // TODO: UPDATE THE SHUFFLEBOARD ENTRIES
-    ShuffleboardTab arm = Shuffleboard.getTab("Arm");
-    arm.addNumber("Encoder angle", () -> m_encoder.getPosition());
+    // ShuffleboardTab arm = Shuffleboard.getTab("Arm");
+    // arm.addNumber("Encoder angle", () -> m_encoder.getPosition());
   }
 }
