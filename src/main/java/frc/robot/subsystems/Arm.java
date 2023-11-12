@@ -30,6 +30,7 @@ public class Arm extends SubsystemBase {
   public final double armLow = 1;
   public final double armHigh = -37;
   public final double armMedium = -20;
+  public final double armIntakeHeight = -33;
   public int lastPos = 0;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 

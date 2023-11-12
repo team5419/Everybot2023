@@ -45,6 +45,7 @@ public class RobotContainer {
   CommandBase armHigh = new ArmToPosition(arm,arm.armHigh,1.5);
   CommandBase armLow = new ArmToPosition(arm,arm.armLow,1.5);
   CommandBase armMedium = new ArmToPosition(arm, arm.armMedium, 1.5);
+  CommandBase armIntake = new ArmToPosition(arm, arm.armIntakeHeight, 1.5);
 
   
   // TODO: IntakeCone, OuttakePiece
@@ -87,6 +88,7 @@ public class RobotContainer {
     m_codriverController.povRight().whileTrue(armMedium);
     m_codriverController.povUp().whileTrue(armHigh);
     m_codriverController.povDown().whileTrue(armLow);
+    m_codriverController.povLeft().whileTrue(armIntake);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to
