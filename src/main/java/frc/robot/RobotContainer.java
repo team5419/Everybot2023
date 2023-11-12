@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.ArmRunAndReset;
 // import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmToPosition;
 import frc.robot.commands.DefaultDrive;
@@ -45,8 +46,8 @@ public class RobotContainer {
   CommandBase armHigh = new ArmToPosition(arm,arm.armHigh,1.5);
   CommandBase armLow = new ArmToPosition(arm,arm.armLow,1.5);
   CommandBase armMedium = new ArmToPosition(arm, arm.armMedium, 1.5);
-
-  
+  CommandBase armHighReset = new ArmRunAndReset(arm, arm.armHigh);
+  CommandBase armMediumReset = new ArmRunAndReset(arm, arm.armMedium);
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -87,6 +88,8 @@ public class RobotContainer {
     m_codriverController.povRight().whileTrue(armMedium);
     m_codriverController.povUp().whileTrue(armHigh);
     m_codriverController.povDown().whileTrue(armLow);
+    m_codriverController.leftTrigger().onTrue(armHighReset);
+    m_codriverController.rightTrigger().onTrue(armMediumReset);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to
