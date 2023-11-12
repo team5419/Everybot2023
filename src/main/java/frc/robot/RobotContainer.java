@@ -101,7 +101,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return new AutoMobility(drive);
+    // return new AutoJitter(drive);
+    // return new AutoMobility(drive);
+    return new AutoScoreAndMobility(drive, intake, arm);
   }
 
   public void setDriveToBrake() {

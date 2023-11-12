@@ -1,5 +1,6 @@
 package frc.robot.autos;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
@@ -19,11 +20,19 @@ public class AutoScoreAndMobility extends SequentialCommandGroup{
         this.arm = arm;
         addRequirements(this.drivetrain);
         addCommands(
-            new IntakeCone(intake),
-            new ArmToPosition(arm, 0, 0),
-            new OuttakePiece(intake),
-            new ArmToPosition(arm, 0, 0),
-            new TimeDrive(drivetrain, 0.0, 0.5, 0.5)
+            // set robobt 16.5-17 inches away
+            new IntakeCone(intake).withTimeout(0.3),
+            Commands.parallel(
+                new IntakeCone(intake).withTimeout(1.5),
+                new ArmToPosition(arm, arm.armHigh, 0.6).withTimeout(1.5)
+                ),
+            new OuttakePiece(intake).withTimeout(1.8),
+            new ArmToPosition(arm, 0, 0.6).withTimeout(1.7),
+            Commands.parallel(
+                new OuttakePiece(intake).withTimeout(0.7),
+                new TimeDrive(drivetrain, 0.0, 0.4, 0.7)
+            ),
+            new TimeDrive(drivetrain, 0.0, 0.4, 1.1)
         );
     }
 }
