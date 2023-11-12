@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 // import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmToPosition;
@@ -18,7 +19,9 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeCone;
 import frc.robot.commands.OuttakePiece;
+import frc.robot.autos.AutoJitter;
 import frc.robot.autos.AutoMobility;
+import frc.robot.autos.AutoScoreAndMobility;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -37,6 +40,13 @@ public class RobotContainer {
   CommandBase cubeIntake = new IntakeCube(intake);
   CommandBase coneIntake = new IntakeCone(intake);
   CommandBase outtakePiece = new OuttakePiece(intake);
+  CommandBase brakeModeCmd = drive.brakeModeCmd();
+  CommandBase zeroArm = new InstantCommand(() -> arm.zero());
+  CommandBase armHigh = new ArmToPosition(arm,arm.armHigh,1.5);
+  CommandBase armLow = new ArmToPosition(arm,arm.armLow,1.5);
+  CommandBase armMedium = new ArmToPosition(arm, arm.armMedium, 1.5);
+
+  
   // TODO: IntakeCone, OuttakePiece
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -67,11 +77,16 @@ public class RobotContainer {
     // whileTrue -- schedules when pressed, cancels when released
     /* TODO: INTAKE - can adjust mapping */
     // m_codriverController.x().whileTrue(cubeIntake);
-    m_codriverController.b().whileTrue(cubeIntake);
+    m_codriverController.x().whileTrue(cubeIntake);
     m_codriverController.a().whileTrue(coneIntake);
-    m_codriverController.x().whileTrue(outtakePiece);
+    m_codriverController.b().whileTrue(outtakePiece);
     m_driverController.leftBumper().whileTrue(outtakePiece);
     m_codriverController.y().onTrue(stopIntake);
+    m_driverController.a().onTrue(brakeModeCmd);
+    m_codriverController.rightBumper().onTrue(zeroArm);
+    m_codriverController.povRight().whileTrue(armMedium);
+    m_codriverController.povUp().whileTrue(armHigh);
+    m_codriverController.povDown().whileTrue(armLow);
     // Gets the boolean value of a button
     // m_driverController.getHID().getCrossButton()
     // Gets the trigger, which a command can be bound to

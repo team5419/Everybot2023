@@ -16,7 +16,7 @@ public class Intake extends SubsystemBase {
   // TODO: DECLARE MOTOR (CANSparkMax object)
   private final CANSparkMax m_Intake;
   // set motor current limit
-  private static final int INTAKE_CURRENT_LIMIT = 35;
+  private static final int INTAKE_CURRENT_LIMIT = 15;
 
   private int gamePiece = 0; // 0 for cubes, 1 for cones
 
@@ -30,17 +30,19 @@ public class Intake extends SubsystemBase {
       m_Intake.setSmartCurrentLimit(INTAKE_CURRENT_LIMIT);
     // TODO: set motor in brake mode so that the motor holds position even when not given a command
       m_Intake.setIdleMode(IdleMode.kBrake);
+
+      m_Intake.setInverted(true);
   }
 
   // TODO: DEFINE & SET POWER TO HOLD CONE OR CUBE IN INTAKE
   // Cubes and cones are fed in from different directions so the roller drive direction will be
   // inverted
   public void setConeHoldPower() {
-    m_Intake.set(0.4);
+    m_Intake.set(0.2);
   }
 
   public void setConeIntakePower() {
-    m_Intake.set(0.9);
+    m_Intake.set(0.7);
   }
 
   public void setConeOuttakePower() {
